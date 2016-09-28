@@ -49,16 +49,15 @@ namespace Bier.Models
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "Gebruikersnaam")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Paswoord")]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "Onthouden?")]
         public bool RememberMe { get; set; }
     }
 
@@ -70,14 +69,18 @@ namespace Bier.Models
         public string Email { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [Display(Name = "Gebruikersnaam")]
+        public string Username { get; set; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "Het {0} moet minstens {2} tekens lang zijn.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Paswoord")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Display(Name = "Bevestig paswoord")]
+        [Compare("Password", ErrorMessage = "Het paswoord en bevestigings paswoord komen niet overeen.")]
         public string ConfirmPassword { get; set; }
     }
 

@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Bier.Models;
+using System.Net.Mail;
 
 namespace Bier.Controllers
 {
@@ -73,9 +74,20 @@ namespace Bier.Controllers
                 return View(model);
             }
 
+            // Require the user to have a confirmed email before they can log on.
+            var user = await UserManager.FindByNameAsync(model.UserName);
+            if (user != null)
+            {
+                if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+                {
+                    ViewBag.errorMessage = "You must have a confirmed email to log on.";
+                    return View("Error");
+                }
+            }
+
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -151,19 +163,29 @@ namespace Bier.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Username, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    ConfirmationEmail accountInfo = new ConfirmationEmail();
+                    accountInfo.FromEmail = user.Email;
+                    accountInfo.UserName = user.UserName;
+
+                    await SendConfirmationMail(accountInfo, callbackUrl);
+
+                    ViewBag.Message = "Een bevestigingsmail werd gestuurd naar het gegeven email adres. U account moet bevestigd zijn voor u verder kan gaan.";
+
+                    return View("info");
+
+                    //return RedirectToAction("Index", "Home");
                 }
                 AddErrors(result);
             }
@@ -481,5 +503,28 @@ namespace Bier.Controllers
             }
         }
         #endregion
+
+
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> SendConfirmationMail(ConfirmationEmail model, string callbackUrl)
+        {
+            MailMessage message = new MailMessage();
+            message.To.Add(model.FromEmail);
+            message.Subject = "Bierlijst Registratie";
+            message.Body = "<p>Beste " + model.UserName + "</p><br />";
+            message.Body += "<p>Er werd een account voor u gemaakt op De Bier Lijst.<br />";
+            message.Body += "Gelieve uw account te bevestigen door op deze <a href =\"" + callbackUrl + "\">link</a> te drukken. <br />";
+            message.Body += "Als bovenstaande link niet werkt kunt u onderstaande url kopi&#235;ren en in de adres balk van uw browser plakken.<br/><br/>";
+            message.Body += callbackUrl + "<br /><br />";
+            message.Body += "Met vriendelijke groeten</p>";
+            message.IsBodyHtml = true;
+
+            using (SmtpClient smtp = new SmtpClient())
+            {
+                await smtp.SendMailAsync(message);
+                return null;
+            }
+            
+        }
     }
 }

@@ -4,6 +4,7 @@
 # Self added files
 Setting.config
 ConnectionString.Config
+MailSettings.config
 
 # User-specific files
 *.suo

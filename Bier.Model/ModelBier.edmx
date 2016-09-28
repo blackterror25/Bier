@@ -1,0 +1,625 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="beerModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="aspnetroles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnetuserclaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="ClaimType" Type="varchar" MaxLength="255" />
+          <Property Name="ClaimValue" Type="varchar" MaxLength="255" />
+          <Property Name="UserId" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnetuserlogins">
+          <Key>
+            <PropertyRef Name="ProviderKey" />
+          </Key>
+          <Property Name="ProviderKey" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="LoginProvider" Type="varchar" MaxLength="255" />
+          <Property Name="UserId" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'def.beer.aspnetuserroles' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="aspnetuserroles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="RoleId" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="aspnetusers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="SecurityStamp" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="date" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="PhoneNumber" Type="int" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="100" />
+          <Property Name="AdressLine" Type="varchar" MaxLength="255" />
+          <Property Name="City" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="bier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InhoudId" Type="int" Nullable="false" />
+          <Property Name="Naam" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Label" Type="varchar" MaxLength="255" />
+          <Property Name="Temperatuur" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Barcode" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="inhoud">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Inhoud" Type="double" />
+          <Property Name="Eenheid" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="item">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bierid" Type="int" Nullable="false" />
+          <Property Name="LocatieColumn" Type="int" Nullable="false" />
+          <Property Name="AspNetUsersId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Aantal" Type="int" Nullable="false" />
+          <Property Name="Openbaar" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="locatie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Naam" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Temperatuur" Type="double" Nullable="false" />
+          <Property Name="AspNetUsersId" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <Association Name="FKAspNetUser206040">
+          <End Role="aspnetroles" Type="Self.aspnetroles" Multiplicity="1" />
+          <End Role="aspnetuserroles" Type="Self.aspnetuserroles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnetroles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="aspnetuserroles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAspNetUser367573">
+          <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="1" />
+          <End Role="aspnetuserclaims" Type="Self.aspnetuserclaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnetusers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="aspnetuserclaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAspNetUser475028">
+          <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="1" />
+          <End Role="aspnetuserroles" Type="Self.aspnetuserroles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnetusers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="aspnetuserroles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAspNetUser755613">
+          <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="1" />
+          <End Role="aspnetuserlogins" Type="Self.aspnetuserlogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnetusers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="aspnetuserlogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKBier353157">
+          <End Role="inhoud" Type="Self.inhoud" Multiplicity="1" />
+          <End Role="bier" Type="Self.bier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="inhoud">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="bier">
+              <PropertyRef Name="InhoudId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKItem547871">
+          <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="1" />
+          <End Role="item" Type="Self.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnetusers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="AspNetUsersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKItem887979">
+          <End Role="locatie" Type="Self.locatie" Multiplicity="1" />
+          <End Role="item" Type="Self.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="locatie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="LocatieColumn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKItem979642">
+          <End Role="bier" Type="Self.bier" Multiplicity="1" />
+          <End Role="item" Type="Self.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="Bierid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLocatie639258">
+          <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="1" />
+          <End Role="locatie" Type="Self.locatie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnetusers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="locatie">
+              <PropertyRef Name="AspNetUsersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="beerModelStoreContainer">
+          <EntitySet Name="aspnetroles" EntityType="Self.aspnetroles" Schema="beer" store:Type="Tables" />
+          <EntitySet Name="aspnetuserclaims" EntityType="Self.aspnetuserclaims" Schema="beer" store:Type="Tables" />
+          <EntitySet Name="aspnetuserlogins" EntityType="Self.aspnetuserlogins" Schema="beer" store:Type="Tables" />
+          <EntitySet Name="aspnetusers" EntityType="Self.aspnetusers" Schema="beer" store:Type="Tables" />
+          <EntitySet Name="bier" EntityType="Self.bier" Schema="beer" store:Type="Tables" />
+          <EntitySet Name="inhoud" EntityType="Self.inhoud" Schema="beer" store:Type="Tables" />
+          <EntitySet Name="item" EntityType="Self.item" Schema="beer" store:Type="Tables" />
+          <EntitySet Name="locatie" EntityType="Self.locatie" Schema="beer" store:Type="Tables" />
+          <EntitySet Name="aspnetuserroles" EntityType="Self.aspnetuserroles" store:Type="Tables" store:Schema="beer">
+            <DefiningQuery>SELECT
+`aspnetuserroles`.`UserId`, 
+`aspnetuserroles`.`RoleId`
+FROM `aspnetuserroles` AS `aspnetuserroles`</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FKAspNetUser206040" Association="Self.FKAspNetUser206040">
+            <End Role="aspnetroles" EntitySet="aspnetroles" />
+            <End Role="aspnetuserroles" EntitySet="aspnetuserroles" />
+          </AssociationSet>
+          <AssociationSet Name="FKAspNetUser367573" Association="Self.FKAspNetUser367573">
+            <End Role="aspnetusers" EntitySet="aspnetusers" />
+            <End Role="aspnetuserclaims" EntitySet="aspnetuserclaims" />
+          </AssociationSet>
+          <AssociationSet Name="FKAspNetUser475028" Association="Self.FKAspNetUser475028">
+            <End Role="aspnetusers" EntitySet="aspnetusers" />
+            <End Role="aspnetuserroles" EntitySet="aspnetuserroles" />
+          </AssociationSet>
+          <AssociationSet Name="FKAspNetUser755613" Association="Self.FKAspNetUser755613">
+            <End Role="aspnetusers" EntitySet="aspnetusers" />
+            <End Role="aspnetuserlogins" EntitySet="aspnetuserlogins" />
+          </AssociationSet>
+          <AssociationSet Name="FKBier353157" Association="Self.FKBier353157">
+            <End Role="inhoud" EntitySet="inhoud" />
+            <End Role="bier" EntitySet="bier" />
+          </AssociationSet>
+          <AssociationSet Name="FKItem547871" Association="Self.FKItem547871">
+            <End Role="aspnetusers" EntitySet="aspnetusers" />
+            <End Role="item" EntitySet="item" />
+          </AssociationSet>
+          <AssociationSet Name="FKItem887979" Association="Self.FKItem887979">
+            <End Role="locatie" EntitySet="locatie" />
+            <End Role="item" EntitySet="item" />
+          </AssociationSet>
+          <AssociationSet Name="FKItem979642" Association="Self.FKItem979642">
+            <End Role="bier" EntitySet="bier" />
+            <End Role="item" EntitySet="item" />
+          </AssociationSet>
+          <AssociationSet Name="FKLocatie639258" Association="Self.FKLocatie639258">
+            <End Role="aspnetusers" EntitySet="aspnetusers" />
+            <End Role="locatie" EntitySet="locatie" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="beerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="aspnetroles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="aspnetusers" Relationship="Self.aspnetuserroles" FromRole="aspnetroles" ToRole="aspnetusers" />
+        </EntityType>
+        <EntityType Name="aspnetuserclaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ClaimValue" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="aspnetusers" Relationship="Self.FKAspNetUser367573" FromRole="aspnetuserclaims" ToRole="aspnetusers" />
+        </EntityType>
+        <EntityType Name="aspnetuserlogins">
+          <Key>
+            <PropertyRef Name="ProviderKey" />
+          </Key>
+          <Property Name="ProviderKey" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LoginProvider" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="UserId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="aspnetusers" Relationship="Self.FKAspNetUser755613" FromRole="aspnetuserlogins" ToRole="aspnetusers" />
+        </EntityType>
+        <EntityType Name="aspnetusers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="Int32" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="AdressLine" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="aspnetuserclaims" Relationship="Self.FKAspNetUser367573" FromRole="aspnetusers" ToRole="aspnetuserclaims" />
+          <NavigationProperty Name="aspnetuserlogins" Relationship="Self.FKAspNetUser755613" FromRole="aspnetusers" ToRole="aspnetuserlogins" />
+          <NavigationProperty Name="item" Relationship="Self.FKItem547871" FromRole="aspnetusers" ToRole="item" />
+          <NavigationProperty Name="aspnetroles" Relationship="Self.aspnetuserroles" FromRole="aspnetusers" ToRole="aspnetroles" />
+          <NavigationProperty Name="locatie" Relationship="beerModel.FKLocatie639258" FromRole="aspnetusers" ToRole="locatie" />
+        </EntityType>
+        <EntityType Name="bier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InhoudId" Type="Int32" Nullable="false" />
+          <Property Name="Naam" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Label" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Temperatuur" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Barcode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="inhoud" Relationship="Self.FKBier353157" FromRole="bier" ToRole="inhoud" />
+          <NavigationProperty Name="item" Relationship="Self.FKItem979642" FromRole="bier" ToRole="item" />
+        </EntityType>
+        <EntityType Name="inhoud">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Inhoud1" Type="Double" />
+          <Property Name="Eenheid" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="bier" Relationship="Self.FKBier353157" FromRole="inhoud" ToRole="bier" />
+        </EntityType>
+        <EntityType Name="item">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bierid" Type="Int32" Nullable="false" />
+          <Property Name="LocatieColumn" Type="Int32" Nullable="false" />
+          <Property Name="AspNetUsersId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Aantal" Type="Int32" Nullable="false" />
+          <Property Name="Openbaar" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="aspnetusers" Relationship="Self.FKItem547871" FromRole="item" ToRole="aspnetusers" />
+          <NavigationProperty Name="bier" Relationship="Self.FKItem979642" FromRole="item" ToRole="bier" />
+          <NavigationProperty Name="locatie" Relationship="Self.FKItem887979" FromRole="item" ToRole="locatie" />
+        </EntityType>
+        <EntityType Name="locatie">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Naam" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Temperatuur" Type="Double" Nullable="false" />
+          <NavigationProperty Name="item" Relationship="Self.FKItem887979" FromRole="locatie" ToRole="item" />
+          <Property Name="AspNetUsersId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="aspnetusers" Relationship="beerModel.FKLocatie639258" FromRole="locatie" ToRole="aspnetusers" />
+        </EntityType>
+        <Association Name="FKAspNetUser367573">
+          <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="1" />
+          <End Role="aspnetuserclaims" Type="Self.aspnetuserclaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnetusers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="aspnetuserclaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKAspNetUser755613">
+          <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="1" />
+          <End Role="aspnetuserlogins" Type="Self.aspnetuserlogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnetusers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="aspnetuserlogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKItem547871">
+          <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="1" />
+          <End Role="item" Type="Self.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnetusers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="AspNetUsersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKBier353157">
+          <End Role="inhoud" Type="Self.inhoud" Multiplicity="1" />
+          <End Role="bier" Type="Self.bier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="inhoud">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="bier">
+              <PropertyRef Name="InhoudId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKItem979642">
+          <End Role="bier" Type="Self.bier" Multiplicity="1" />
+          <End Role="item" Type="Self.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="bier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="Bierid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKItem887979">
+          <End Role="locatie" Type="Self.locatie" Multiplicity="1" />
+          <End Role="item" Type="Self.item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="locatie">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="item">
+              <PropertyRef Name="LocatieColumn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="aspnetuserroles">
+          <End Role="aspnetroles" Type="Self.aspnetroles" Multiplicity="*" />
+          <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="beerEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="aspnetroles" EntityType="Self.aspnetroles" />
+          <EntitySet Name="aspnetuserclaims" EntityType="Self.aspnetuserclaims" />
+          <EntitySet Name="aspnetuserlogins" EntityType="Self.aspnetuserlogins" />
+          <EntitySet Name="aspnetusers" EntityType="Self.aspnetusers" />
+          <EntitySet Name="bier" EntityType="Self.bier" />
+          <EntitySet Name="inhoud" EntityType="Self.inhoud" />
+          <EntitySet Name="item" EntityType="Self.item" />
+          <EntitySet Name="locatie" EntityType="Self.locatie" />
+          <AssociationSet Name="FKAspNetUser367573" Association="Self.FKAspNetUser367573">
+            <End Role="aspnetusers" EntitySet="aspnetusers" />
+            <End Role="aspnetuserclaims" EntitySet="aspnetuserclaims" />
+          </AssociationSet>
+          <AssociationSet Name="FKAspNetUser755613" Association="Self.FKAspNetUser755613">
+            <End Role="aspnetusers" EntitySet="aspnetusers" />
+            <End Role="aspnetuserlogins" EntitySet="aspnetuserlogins" />
+          </AssociationSet>
+          <AssociationSet Name="FKItem547871" Association="Self.FKItem547871">
+            <End Role="aspnetusers" EntitySet="aspnetusers" />
+            <End Role="item" EntitySet="item" />
+          </AssociationSet>
+          <AssociationSet Name="FKBier353157" Association="Self.FKBier353157">
+            <End Role="inhoud" EntitySet="inhoud" />
+            <End Role="bier" EntitySet="bier" />
+          </AssociationSet>
+          <AssociationSet Name="FKItem979642" Association="Self.FKItem979642">
+            <End Role="bier" EntitySet="bier" />
+            <End Role="item" EntitySet="item" />
+          </AssociationSet>
+          <AssociationSet Name="FKItem887979" Association="Self.FKItem887979">
+            <End Role="locatie" EntitySet="locatie" />
+            <End Role="item" EntitySet="item" />
+          </AssociationSet>
+          <AssociationSet Name="aspnetuserroles" Association="Self.aspnetuserroles">
+            <End Role="aspnetroles" EntitySet="aspnetroles" />
+            <End Role="aspnetusers" EntitySet="aspnetusers" />
+          </AssociationSet>
+          <AssociationSet Name="FKLocatie639258" Association="beerModel.FKLocatie639258">
+            <End Role="aspnetusers" EntitySet="aspnetusers" />
+            <End Role="locatie" EntitySet="locatie" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FKLocatie639258">
+          <End Type="beerModel.aspnetusers" Role="aspnetusers" Multiplicity="1" />
+          <End Type="beerModel.locatie" Role="locatie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnetusers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="locatie">
+              <PropertyRef Name="AspNetUsersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="beerModelStoreContainer" CdmEntityContainer="beerEntities">
+          <EntitySetMapping Name="aspnetroles">
+            <EntityTypeMapping TypeName="beerModel.aspnetroles">
+              <MappingFragment StoreEntitySet="aspnetroles">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnetuserclaims">
+            <EntityTypeMapping TypeName="beerModel.aspnetuserclaims">
+              <MappingFragment StoreEntitySet="aspnetuserclaims">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnetuserlogins">
+            <EntityTypeMapping TypeName="beerModel.aspnetuserlogins">
+              <MappingFragment StoreEntitySet="aspnetuserlogins">
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="aspnetusers">
+            <EntityTypeMapping TypeName="beerModel.aspnetusers">
+              <MappingFragment StoreEntitySet="aspnetusers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="AdressLine" ColumnName="AdressLine" />
+                <ScalarProperty Name="City" ColumnName="City" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="bier">
+            <EntityTypeMapping TypeName="beerModel.bier">
+              <MappingFragment StoreEntitySet="bier">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InhoudId" ColumnName="InhoudId" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="Temperatuur" ColumnName="Temperatuur" />
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="inhoud">
+            <EntityTypeMapping TypeName="beerModel.inhoud">
+              <MappingFragment StoreEntitySet="inhoud">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Inhoud1" ColumnName="Inhoud" />
+                <ScalarProperty Name="Eenheid" ColumnName="Eenheid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="item">
+            <EntityTypeMapping TypeName="beerModel.item">
+              <MappingFragment StoreEntitySet="item">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Bierid" ColumnName="Bierid" />
+                <ScalarProperty Name="LocatieColumn" ColumnName="LocatieColumn" />
+                <ScalarProperty Name="AspNetUsersId" ColumnName="AspNetUsersId" />
+                <ScalarProperty Name="Aantal" ColumnName="Aantal" />
+                <ScalarProperty Name="Openbaar" ColumnName="Openbaar" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="locatie">
+            <EntityTypeMapping TypeName="beerModel.locatie">
+              <MappingFragment StoreEntitySet="locatie">
+                <ScalarProperty Name="AspNetUsersId" ColumnName="AspNetUsersId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="Temperatuur" ColumnName="Temperatuur" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="aspnetuserroles" TypeName="beerModel.aspnetuserroles" StoreEntitySet="aspnetuserroles">
+            <EndProperty Name="aspnetroles">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+            <EndProperty Name="aspnetusers">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

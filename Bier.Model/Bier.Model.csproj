@@ -108,10 +108,16 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ModelBier.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="ConnectionString.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="ModelBier.edmx.diagram">
       <DependentUpon>ModelBier.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="ModelBier.Context.tt">
@@ -124,9 +130,6 @@
       <DependentUpon>ModelBier.edmx</DependentUpon>
       <LastGenOutput>ModelBier.cs</LastGenOutput>
     </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

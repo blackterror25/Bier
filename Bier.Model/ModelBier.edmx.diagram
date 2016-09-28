@@ -4,23 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bb8bcadeab754b4dac72bb34d15d98d6" Name="Diagram1">
-        <EntityTypeShape EntityType="beerModel.aspnetroles" Width="1.5" PointX="0.625" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="beerModel.aspnetuserclaims" Width="1.5" PointX="0.625" PointY="3" IsExpanded="true" />
-        <EntityTypeShape EntityType="beerModel.aspnetuserlogins" Width="1.5" PointX="0.625" PointY="7.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="beerModel.aspnetusers" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="beerModel.bier" Width="1.5" PointX="9.125" PointY="6" IsExpanded="true" />
-        <EntityTypeShape EntityType="beerModel.inhoud" Width="1.5" PointX="6.25" PointY="7.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="beerModel.item" Width="1.5" PointX="6.125" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="beerModel.locatie" Width="1.5" PointX="9.125" PointY="3.5" IsExpanded="true" />
+      <Diagram DiagramId="a7801b15647c4991883ccaf11e8ffd43" Name="Diagram1">
+        <EntityTypeShape EntityType="beerModel.aspnetroles" Width="1.5" PointX="0.75" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="beerModel.aspnetuserclaims" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="beerModel.aspnetuserlogins" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="beerModel.aspnetusers" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="beerModel.bier" Width="1.5" PointX="9.625" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="beerModel.inhoud" Width="1.5" PointX="9.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="beerModel.item" Width="1.5" PointX="6.875" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="beerModel.locatie" Width="1.5" PointX="6.875" PointY="3.125" IsExpanded="true" />
         <AssociationConnector Association="beerModel.FKAspNetUser367573" ManuallyRouted="false" />
         <AssociationConnector Association="beerModel.FKAspNetUser755613" ManuallyRouted="false" />
         <AssociationConnector Association="beerModel.FKItem547871" ManuallyRouted="false" />
+        <AssociationConnector Association="beerModel.FKLocatie639258" ManuallyRouted="false" />
         <AssociationConnector Association="beerModel.FKBier353157" ManuallyRouted="false" />
         <AssociationConnector Association="beerModel.FKItem979642" ManuallyRouted="false" />
         <AssociationConnector Association="beerModel.FKItem887979" ManuallyRouted="false" />
         <AssociationConnector Association="beerModel.aspnetuserroles" ManuallyRouted="false" />
-        <AssociationConnector Association="beerModel.FKLocatie639258" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

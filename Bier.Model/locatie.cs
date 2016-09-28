@@ -25,8 +25,8 @@ namespace Bier.Model
         public double Temperatuur { get; set; }
         public string AspNetUsersId { get; set; }
     
+        public virtual aspnetusers aspnetusers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<item> item { get; set; }
-        public virtual aspnetusers aspnetusers { get; set; }
     }
 }

@@ -313,8 +313,8 @@ FROM `aspnetuserroles` AS `aspnetuserroles`</DefiningQuery>
           <NavigationProperty Name="aspnetuserclaims" Relationship="Self.FKAspNetUser367573" FromRole="aspnetusers" ToRole="aspnetuserclaims" />
           <NavigationProperty Name="aspnetuserlogins" Relationship="Self.FKAspNetUser755613" FromRole="aspnetusers" ToRole="aspnetuserlogins" />
           <NavigationProperty Name="item" Relationship="Self.FKItem547871" FromRole="aspnetusers" ToRole="item" />
+          <NavigationProperty Name="locatie" Relationship="Self.FKLocatie639258" FromRole="aspnetusers" ToRole="locatie" />
           <NavigationProperty Name="aspnetroles" Relationship="Self.aspnetuserroles" FromRole="aspnetusers" ToRole="aspnetroles" />
-          <NavigationProperty Name="locatie" Relationship="beerModel.FKLocatie639258" FromRole="aspnetusers" ToRole="locatie" />
         </EntityType>
         <EntityType Name="bier">
           <Key>
@@ -359,9 +359,9 @@ FROM `aspnetuserroles` AS `aspnetuserroles`</DefiningQuery>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Naam" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Temperatuur" Type="Double" Nullable="false" />
+          <Property Name="AspNetUsersId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="aspnetusers" Relationship="Self.FKLocatie639258" FromRole="locatie" ToRole="aspnetusers" />
           <NavigationProperty Name="item" Relationship="Self.FKItem887979" FromRole="locatie" ToRole="item" />
-          <Property Name="AspNetUsersId" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="aspnetusers" Relationship="beerModel.FKLocatie639258" FromRole="locatie" ToRole="aspnetusers" />
         </EntityType>
         <Association Name="FKAspNetUser367573">
           <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="1" />
@@ -395,6 +395,18 @@ FROM `aspnetuserroles` AS `aspnetuserroles`</DefiningQuery>
               <PropertyRef Name="Id" />
             </Principal>
             <Dependent Role="item">
+              <PropertyRef Name="AspNetUsersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKLocatie639258">
+          <End Role="aspnetusers" Type="Self.aspnetusers" Multiplicity="1" />
+          <End Role="locatie" Type="Self.locatie" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="aspnetusers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="locatie">
               <PropertyRef Name="AspNetUsersId" />
             </Dependent>
           </ReferentialConstraint>
@@ -460,6 +472,10 @@ FROM `aspnetuserroles` AS `aspnetuserroles`</DefiningQuery>
             <End Role="aspnetusers" EntitySet="aspnetusers" />
             <End Role="item" EntitySet="item" />
           </AssociationSet>
+          <AssociationSet Name="FKLocatie639258" Association="Self.FKLocatie639258">
+            <End Role="aspnetusers" EntitySet="aspnetusers" />
+            <End Role="locatie" EntitySet="locatie" />
+          </AssociationSet>
           <AssociationSet Name="FKBier353157" Association="Self.FKBier353157">
             <End Role="inhoud" EntitySet="inhoud" />
             <End Role="bier" EntitySet="bier" />
@@ -476,23 +492,7 @@ FROM `aspnetuserroles` AS `aspnetuserroles`</DefiningQuery>
             <End Role="aspnetroles" EntitySet="aspnetroles" />
             <End Role="aspnetusers" EntitySet="aspnetusers" />
           </AssociationSet>
-          <AssociationSet Name="FKLocatie639258" Association="beerModel.FKLocatie639258">
-            <End Role="aspnetusers" EntitySet="aspnetusers" />
-            <End Role="locatie" EntitySet="locatie" />
-          </AssociationSet>
         </EntityContainer>
-        <Association Name="FKLocatie639258">
-          <End Type="beerModel.aspnetusers" Role="aspnetusers" Multiplicity="1" />
-          <End Type="beerModel.locatie" Role="locatie" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="aspnetusers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="locatie">
-              <PropertyRef Name="AspNetUsersId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -584,10 +584,10 @@ FROM `aspnetuserroles` AS `aspnetuserroles`</DefiningQuery>
           <EntitySetMapping Name="locatie">
             <EntityTypeMapping TypeName="beerModel.locatie">
               <MappingFragment StoreEntitySet="locatie">
-                <ScalarProperty Name="AspNetUsersId" ColumnName="AspNetUsersId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Naam" ColumnName="Naam" />
                 <ScalarProperty Name="Temperatuur" ColumnName="Temperatuur" />
+                <ScalarProperty Name="AspNetUsersId" ColumnName="AspNetUsersId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

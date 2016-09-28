@@ -20,8 +20,8 @@ namespace Bier.Model
             this.aspnetuserclaims = new HashSet<aspnetuserclaims>();
             this.aspnetuserlogins = new HashSet<aspnetuserlogins>();
             this.item = new HashSet<item>();
-            this.aspnetroles = new HashSet<aspnetroles>();
             this.locatie = new HashSet<locatie>();
+            this.aspnetroles = new HashSet<aspnetroles>();
         }
     
         public string Id { get; set; }
@@ -48,8 +48,8 @@ namespace Bier.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<item> item { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aspnetroles> aspnetroles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<locatie> locatie { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<aspnetroles> aspnetroles { get; set; }
     }
 }

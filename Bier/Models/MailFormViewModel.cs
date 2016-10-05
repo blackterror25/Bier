@@ -16,4 +16,12 @@ namespace Bier.Models
         [Required,EmailAddress]
         public string FromEmail { get; set; }
     }
+
+    public class ResetPasswordEmail
+    {
+        [Required]
+        public string UserName { get; set; }
+        [Required]
+        public string FromEmail { get; set; }
+    }
 }

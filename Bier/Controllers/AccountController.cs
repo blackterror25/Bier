@@ -224,7 +224,7 @@ namespace Bier.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
+                var user = await UserManager.FindByEmailAsync(model.Email);
                 if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
                 {
                     // Don't reveal that the user does not exist or is not confirmed
@@ -233,10 +233,17 @@ namespace Bier.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                //await UserManager.SendEmailAsync(user.Id, "Reset Password", "Gelieve je paswoord te resetten door op de volgende <a href=\"" + callbackUrl + "\">link</a>  te drukken.");
+
+                ResetPasswordEmail accountInfo = new ResetPasswordEmail();
+                accountInfo.UserName = user.UserName;
+                accountInfo.FromEmail = user.Email;
+
+                await SendPasswordResetMail(accountInfo, callbackUrl);
+
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -270,7 +277,7 @@ namespace Bier.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist
@@ -524,7 +531,27 @@ namespace Bier.Controllers
                 await smtp.SendMailAsync(message);
                 return null;
             }
-            
+
+        }
+
+        private async Task<ActionResult> SendPasswordResetMail(ResetPasswordEmail accountInfo, string callbackUrl)
+        {
+            MailMessage message = new MailMessage();
+            message.To.Add(accountInfo.FromEmail);
+            message.Subject = "Bierlijst - Paswoord reset";
+            message.Body = "<p>Beste " + accountInfo.UserName + "</p><br />";
+            message.Body += "<p>Er werd een paswoord reset voor uw account aangevraagd.<br />";
+            message.Body += "Gelieve je paswoord te resetten door op de volgende <a href =\"" + callbackUrl + "\">link</a> te drukken. <br />";
+            message.Body += "Als bovenstaande link niet werkt kunt u onderstaande url kopi&#235;ren en in de adres balk van uw browser plakken.<br/><br/>";
+            message.Body += callbackUrl + "<br /><br />";
+            message.Body += "Met vriendelijke groeten</p>";
+            message.IsBodyHtml = true;
+
+            using (SmtpClient smtp = new SmtpClient())
+            {
+                await smtp.SendMailAsync(message);
+                return null;
+            }
         }
     }
 }

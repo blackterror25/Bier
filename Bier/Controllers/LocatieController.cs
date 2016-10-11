@@ -4,14 +4,29 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using Microsoft.AspNet.Identity;
+
+using Bier.Model;
+using Bier.Service;
+
 namespace Bier.Controllers
 {
     public class LocatieController : Controller
     {
+        private LocatieService locatieService;
+
+        public LocatieController()
+        {
+            locatieService = new LocatieService();
+        }
+
         // GET: Locatie
         public ActionResult Index()
         {
-            return View();
+            var userId = User.Identity.GetUserId();
+            var locationList = locatieService.getAllLocationsPerUser(userId);
+
+            return View(locationList);
         }
 
         // GET: Locatie/Details/5

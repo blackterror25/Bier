@@ -336,13 +336,13 @@
     <Content Include="ConfigFiles\Setting.config" />
     <Content Include="Service References\Application Insights\ConnectedService.json" />
     <Content Include="Views\Shared\info.cshtml" />
+    <Content Include="Views\Locatie\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Bier\" />
     <Folder Include="Views\Inhoud\" />
     <Folder Include="Views\Item\" />
-    <Folder Include="Views\Locatie\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -350,6 +350,16 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bier.Model\Bier.Model.csproj">
+      <Project>{9a0489b9-790d-4281-89c5-bbc4d61ca40e}</Project>
+      <Name>Bier.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bier.Service\Bier.Service.csproj">
+      <Project>{c0d79df2-4738-4a73-9c5b-b608b55d905d}</Project>
+      <Name>Bier.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

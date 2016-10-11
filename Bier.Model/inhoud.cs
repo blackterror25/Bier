@@ -23,8 +23,10 @@ namespace Bier.Model
         public int Id { get; set; }
         public Nullable<double> Inhoud1 { get; set; }
         public string Eenheid { get; set; }
+        public string AspNetUsersId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<bier> bier { get; set; }
+        public virtual aspnetusers aspnetusers { get; set; }
     }
 }

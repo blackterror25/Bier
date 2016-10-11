@@ -22,6 +22,8 @@ namespace Bier.Model
             this.item = new HashSet<item>();
             this.locatie = new HashSet<locatie>();
             this.aspnetroles = new HashSet<aspnetroles>();
+            this.bier = new HashSet<bier>();
+            this.inhoud = new HashSet<inhoud>();
         }
     
         public string Id { get; set; }
@@ -51,5 +53,9 @@ namespace Bier.Model
         public virtual ICollection<locatie> locatie { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aspnetroles> aspnetroles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<bier> bier { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<inhoud> inhoud { get; set; }
     }
 }

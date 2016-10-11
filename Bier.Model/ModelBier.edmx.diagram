@@ -9,8 +9,8 @@
         <EntityTypeShape EntityType="beerModel.aspnetuserclaims" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="beerModel.aspnetuserlogins" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
         <EntityTypeShape EntityType="beerModel.aspnetusers" Width="1.5" PointX="3" PointY="4.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="beerModel.bier" Width="1.5" PointX="9.625" PointY="6.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="beerModel.inhoud" Width="1.5" PointX="9.75" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="beerModel.bier" Width="1.5" PointX="9.625" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="beerModel.inhoud" Width="1.5" PointX="7.125" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="beerModel.item" Width="1.5" PointX="6.875" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="beerModel.locatie" Width="1.5" PointX="6.875" PointY="3.125" IsExpanded="true" />
         <AssociationConnector Association="beerModel.FKAspNetUser367573" ManuallyRouted="false" />
@@ -21,6 +21,12 @@
         <AssociationConnector Association="beerModel.FKItem979642" ManuallyRouted="false" />
         <AssociationConnector Association="beerModel.FKItem887979" ManuallyRouted="false" />
         <AssociationConnector Association="beerModel.aspnetuserroles" ManuallyRouted="false" />
+        <AssociationConnector Association="beerModel.FKBier328768" />
+        <AssociationConnector Association="beerModel.FKInhoud986990" ManuallyRouted="true" >
+          <ConnectorPoint PointX="4.5" PointY="9.36302900065104" />
+          <ConnectorPoint PointX="7.4245414165582924" PointY="9.36302900065104" />
+          <ConnectorPoint PointX="7.4245414165582924" PointY="10.125" />
+        </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

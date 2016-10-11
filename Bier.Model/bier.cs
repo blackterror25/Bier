@@ -26,9 +26,11 @@ namespace Bier.Model
         public string Label { get; set; }
         public string Temperatuur { get; set; }
         public string Barcode { get; set; }
+        public string AspNetUsersId { get; set; }
     
         public virtual inhoud inhoud { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<item> item { get; set; }
+        public virtual aspnetusers aspnetusers { get; set; }
     }
 }

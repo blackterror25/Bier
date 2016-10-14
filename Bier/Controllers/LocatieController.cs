@@ -21,14 +21,14 @@ namespace Bier.Controllers
 
         public LocatieController()
         {
-            locatieService = new LocatieService();
         }
 
         // GET: Locatie
         public ActionResult Index()
         {
+            locatieService = new LocatieService();
             var userId = User.Identity.GetUserId();
-            var locationList = locatieService.getAllLocationsPerUser(userId);
+            var locationList = locatieService.GetAllLocationsPerUser(userId);
 
             return View(locationList);
         }
@@ -52,7 +52,13 @@ namespace Bier.Controllers
             try
             {
                 locatie = new Locatie();
+                locatieService = new LocatieService();
 
+                locatie.AspNetUsersId = User.Identity.GetUserId();
+                locatie.Naam = collection["Naam"];
+                locatie.Temperatuur = Convert.ToDouble(collection["Temperatuur"]);
+
+                locatieService.VoegLocatieToe(locatie);
 
                 return RedirectToAction("Index");
             }

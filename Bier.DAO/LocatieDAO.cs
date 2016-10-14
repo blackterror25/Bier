@@ -22,5 +22,14 @@ namespace Bier.DAO
                 return db.Locatie.Where(l => l.AspNetUsersId == userId).ToList();
             }
         }
+
+        public void VoegLocatieToe(Locatie locatie)
+        {
+            using (var db = new beerEntities())
+            {
+                db.Entry(locatie).State = EntityState.Added;
+                db.SaveChanges();
+            }
+        }
     }
 }

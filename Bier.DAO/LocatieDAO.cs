@@ -15,11 +15,11 @@ namespace Bier.DAO
 {
     public class LocatieDAO
     {
-        public IEnumerable<locatie> getAllLocationsPerUser(string userId)
+        public IEnumerable<Locatie> getAllLocationsPerUser(string userId)
         {
             using (var db = new beerEntities())
             {
-                return db.locatie.Where(l => l.AspNetUsersId == userId).ToList();
+                return db.Locatie.Where(l => l.AspNetUsersId == userId).ToList();
             }
         }
     }

@@ -59,28 +59,28 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="aspnetroles.cs">
+    <Compile Include="AspNetRoles.cs">
       <DependentUpon>ModelBier.tt</DependentUpon>
     </Compile>
-    <Compile Include="aspnetuserclaims.cs">
+    <Compile Include="AspNetUserClaims.cs">
       <DependentUpon>ModelBier.tt</DependentUpon>
     </Compile>
-    <Compile Include="aspnetuserlogins.cs">
+    <Compile Include="AspNetUserLogins.cs">
       <DependentUpon>ModelBier.tt</DependentUpon>
     </Compile>
-    <Compile Include="aspnetusers.cs">
+    <Compile Include="AspNetUsers.cs">
       <DependentUpon>ModelBier.tt</DependentUpon>
     </Compile>
-    <Compile Include="bier.cs">
+    <Compile Include="Bier.cs">
       <DependentUpon>ModelBier.tt</DependentUpon>
     </Compile>
-    <Compile Include="inhoud.cs">
+    <Compile Include="Inhoud.cs">
       <DependentUpon>ModelBier.tt</DependentUpon>
     </Compile>
-    <Compile Include="item.cs">
+    <Compile Include="Item.cs">
       <DependentUpon>ModelBier.tt</DependentUpon>
     </Compile>
-    <Compile Include="locatie.cs">
+    <Compile Include="Locatie.cs">
       <DependentUpon>ModelBier.tt</DependentUpon>
     </Compile>
     <Compile Include="ModelBier.Context.cs">
@@ -101,25 +101,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config">
-      <SubType>Designer</SubType>
-    </None>
-    <EntityDeploy Include="ModelBier.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ModelBier.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="ConnectionString.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <None Include="ModelBier.edmx.diagram">
-      <DependentUpon>ModelBier.edmx</DependentUpon>
-    </None>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="ModelBier.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ModelBier.edmx</DependentUpon>
@@ -130,6 +111,23 @@
       <DependentUpon>ModelBier.edmx</DependentUpon>
       <LastGenOutput>ModelBier.cs</LastGenOutput>
     </Content>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Content Include="ConnectionString.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <EntityDeploy Include="ModelBier.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelBier.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ModelBier.edmx.diagram">
+      <DependentUpon>ModelBier.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -18,7 +18,7 @@ namespace Bier.Service
             locatieDAO = new LocatieDAO();
         }
 
-        public IEnumerable<locatie> getAllLocationsPerUser(string userId)
+        public IEnumerable<Locatie> getAllLocationsPerUser(string userId)
         {
             return locatieDAO.getAllLocationsPerUser(userId);
         }

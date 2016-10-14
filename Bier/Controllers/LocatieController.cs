@@ -17,6 +17,7 @@ namespace Bier.Controllers
     public class LocatieController : Controller
     {
         private LocatieService locatieService;
+        private Locatie locatie;
 
         public LocatieController()
         {
@@ -50,7 +51,8 @@ namespace Bier.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                locatie = new Locatie();
+
 
                 return RedirectToAction("Index");
             }

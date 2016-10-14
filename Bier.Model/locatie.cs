@@ -12,21 +12,21 @@ namespace Bier.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class locatie
+    public partial class Locatie
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public locatie()
+        public Locatie()
         {
-            this.item = new HashSet<item>();
+            this.Item = new HashSet<Item>();
         }
     
         public int Id { get; set; }
+        public string AspNetUsersId { get; set; }
         public string Naam { get; set; }
         public double Temperatuur { get; set; }
-        public string AspNetUsersId { get; set; }
     
-        public virtual aspnetusers aspnetusers { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<item> item { get; set; }
+        public virtual ICollection<Item> Item { get; set; }
     }
 }

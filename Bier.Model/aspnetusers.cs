@@ -12,18 +12,18 @@ namespace Bier.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class aspnetusers
+    public partial class AspNetUsers
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public aspnetusers()
+        public AspNetUsers()
         {
-            this.aspnetuserclaims = new HashSet<aspnetuserclaims>();
-            this.aspnetuserlogins = new HashSet<aspnetuserlogins>();
-            this.item = new HashSet<item>();
-            this.locatie = new HashSet<locatie>();
-            this.aspnetroles = new HashSet<aspnetroles>();
-            this.bier = new HashSet<bier>();
-            this.inhoud = new HashSet<inhoud>();
+            this.AspNetUserClaims = new HashSet<AspNetUserClaims>();
+            this.AspNetUserLogins = new HashSet<AspNetUserLogins>();
+            this.Bier = new HashSet<Bier>();
+            this.Inhoud = new HashSet<Inhoud>();
+            this.Item = new HashSet<Item>();
+            this.Locatie = new HashSet<Locatie>();
+            this.AspNetRoles = new HashSet<AspNetRoles>();
         }
     
         public string Id { get; set; }
@@ -44,18 +44,18 @@ namespace Bier.Model
         public string City { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aspnetuserclaims> aspnetuserclaims { get; set; }
+        public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aspnetuserlogins> aspnetuserlogins { get; set; }
+        public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<item> item { get; set; }
+        public virtual ICollection<Bier> Bier { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<locatie> locatie { get; set; }
+        public virtual ICollection<Inhoud> Inhoud { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aspnetroles> aspnetroles { get; set; }
+        public virtual ICollection<Item> Item { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<bier> bier { get; set; }
+        public virtual ICollection<Locatie> Locatie { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<inhoud> inhoud { get; set; }
+        public virtual ICollection<AspNetRoles> AspNetRoles { get; set; }
     }
 }

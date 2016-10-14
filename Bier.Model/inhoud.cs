@@ -12,21 +12,21 @@ namespace Bier.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class inhoud
+    public partial class Inhoud
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public inhoud()
+        public Inhoud()
         {
-            this.bier = new HashSet<bier>();
+            this.Bier = new HashSet<Bier>();
         }
     
         public int Id { get; set; }
+        public string AspNetUsersId { get; set; }
         public Nullable<double> Inhoud1 { get; set; }
         public string Eenheid { get; set; }
-        public string AspNetUsersId { get; set; }
     
+        public virtual AspNetUsers AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<bier> bier { get; set; }
-        public virtual aspnetusers aspnetusers { get; set; }
+        public virtual ICollection<Bier> Bier { get; set; }
     }
 }

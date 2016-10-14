@@ -12,7 +12,7 @@ namespace Bier.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class item
+    public partial class Item
     {
         public int id { get; set; }
         public int Bierid { get; set; }
@@ -21,8 +21,8 @@ namespace Bier.Model
         public int Aantal { get; set; }
         public bool Openbaar { get; set; }
     
-        public virtual aspnetusers aspnetusers { get; set; }
-        public virtual bier bier { get; set; }
-        public virtual locatie locatie { get; set; }
+        public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual Bier Bier { get; set; }
+        public virtual Locatie Locatie { get; set; }
     }
 }

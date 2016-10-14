@@ -6,6 +6,9 @@ using System.Web.Mvc;
 
 using Microsoft.AspNet.Identity;
 
+
+using System.Data.Entity;
+
 using Bier.Model;
 using Bier.Service;
 

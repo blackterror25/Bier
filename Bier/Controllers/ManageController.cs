@@ -8,6 +8,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Bier.Models;
 
+using Bier.Service;
+
 namespace Bier.Controllers
 {
     [Authorize]
@@ -15,6 +17,7 @@ namespace Bier.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private UserService userService;
 
         public ManageController()
         {
@@ -55,12 +58,13 @@ namespace Bier.Controllers
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                message == ManageMessageId.ChangePasswordSuccess ? "Uw wachtwoord werd veranderd."
+                : message == ManageMessageId.SetPasswordSuccess ? "Uw wachtwoord werd ingesteld."
+                : message == ManageMessageId.SetTwoFactorSuccess ? "Uw 2-factor authenticatie provider is ingesteld."
+                : message == ManageMessageId.Error ? "Er heeft zich een fout voorgedaan."
+                : message == ManageMessageId.AddPhoneSuccess ? "Uw telefoon nummer werd toegevoegd."
+                : message == ManageMessageId.RemovePhoneSuccess ? "Uw telefoon nummer werd verwijderd."
+                : message == ManageMessageId.SettingsSaved ? "Uw instellingen werden opgeslaan."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -72,6 +76,34 @@ namespace Bier.Controllers
                 Logins = await UserManager.GetLoginsAsync(userId),
                 BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
             };
+            
+            model.ShowPublicLocatie = UserService.GetShowPublicLocatie(userId);
+            model.ShowPublicInhoud = UserService.GetShowPublicInhoud(userId);
+            model.ShowPublicBier = UserService.GetShowPublicBier(userId);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> SaveSettings(IndexViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var result = UserService.VeranderPublicSettings(User.Identity.GetUserId(), model.ShowPublicLocatie, model.ShowPublicInhoud, model.ShowPublicBier);
+
+            if (result)
+            {
+                var user = await UserManager.FindByIdAsync(User.Identity.GetUserId());
+                if (user != null)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                }
+                return RedirectToAction("Index", new { Message = ManageMessageId.SettingsSaved });
+            }
+
             return View(model);
         }
 
@@ -381,6 +413,7 @@ namespace Bier.Controllers
             SetPasswordSuccess,
             RemoveLoginSuccess,
             RemovePhoneSuccess,
+            SettingsSaved,
             Error
         }
 

@@ -12,6 +12,7 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Bier.Models;
 
+
 namespace Bier
 {
     public class EmailService : IIdentityMessageService

@@ -59,6 +59,9 @@ warning 6002: The table/view 'def.beer.AspNetUserRoles' does not have a primary 
           <Property Name="FirstName" Type="varchar" MaxLength="100" />
           <Property Name="AdressLine" Type="varchar" MaxLength="255" />
           <Property Name="City" Type="varchar" MaxLength="255" />
+          <Property Name="ShowPublicLocatie" Type="bit" Nullable="false" />
+          <Property Name="ShowPublicInhoud" Type="bit" Nullable="false" />
+          <Property Name="ShowPublicBier" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Bier">
           <Key>
@@ -97,7 +100,7 @@ warning 6002: The table/view 'def.beer.AspNetUserRoles' does not have a primary 
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="AspNetUsersId" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="AspNetUsersId" Type="varchar" MaxLength="100" />
           <Property Name="Naam" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Temperatuur" Type="double" Nullable="false" />
         </EntityType>
@@ -222,7 +225,7 @@ warning 6002: The table/view 'def.beer.AspNetUserRoles' does not have a primary 
           </ReferentialConstraint>
         </Association>
         <Association Name="FKLocatie639258">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
           <End Role="Locatie" Type="Self.Locatie" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AspNetUsers">
@@ -351,6 +354,9 @@ FROM `AspNetUserRoles` AS `AspNetUserRoles`</DefiningQuery>
           <NavigationProperty Name="Item" Relationship="Self.FKItem547871" FromRole="AspNetUsers" ToRole="Item" />
           <NavigationProperty Name="Locatie" Relationship="Self.FKLocatie639258" FromRole="AspNetUsers" ToRole="Locatie" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+          <Property Name="ShowPublicLocatie" Type="Boolean" Nullable="false" />
+          <Property Name="ShowPublicInhoud" Type="Boolean" Nullable="false" />
+          <Property Name="ShowPublicBier" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Bier">
           <Key>
@@ -601,6 +607,9 @@ FROM `AspNetUserRoles` AS `AspNetUserRoles`</DefiningQuery>
           <EntitySetMapping Name="AspNetUsers">
             <EntityTypeMapping TypeName="beerModel.AspNetUsers">
               <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="ShowPublicBier" ColumnName="ShowPublicBier" />
+                <ScalarProperty Name="ShowPublicInhoud" ColumnName="ShowPublicInhoud" />
+                <ScalarProperty Name="ShowPublicLocatie" ColumnName="ShowPublicLocatie" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />

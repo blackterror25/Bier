@@ -42,6 +42,9 @@ namespace Bier.Model
         public string FirstName { get; set; }
         public string AdressLine { get; set; }
         public string City { get; set; }
+        public bool ShowPublicLocatie { get; set; }
+        public bool ShowPublicInhoud { get; set; }
+        public bool ShowPublicBier { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }

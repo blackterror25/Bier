@@ -11,6 +11,7 @@ using System.Data.Entity;
 
 using Bier.Model;
 using Bier.Service;
+using System.Net;
 
 namespace Bier.Controllers
 {
@@ -33,12 +34,7 @@ namespace Bier.Controllers
             return View(locationList);
         }
 
-        // GET: Locatie/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
+        
         // GET: Locatie/Create
         public ActionResult Create()
         {
@@ -69,18 +65,47 @@ namespace Bier.Controllers
         }
 
         // GET: Locatie/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+        
+            locatie = new Locatie();
+            locatieService = new LocatieService();
+
+            locatie = locatieService.GetLocatiePerId(Convert.ToInt32(id));
+
+            if (locatie == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(locatie);
         }
 
         // POST: Locatie/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int? id, FormCollection collection)
         {
             try
             {
-                // TODO: Add update logic here
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                //TODO: is locatie volgens ID weldegelijk an deze gebruiker gelinkt?
+                locatieService = new LocatieService();
+                locatie = new Locatie();
+
+                locatie.Id = Convert.ToInt32(id);
+                locatie.AspNetUsersId = User.Identity.GetUserId();
+                locatie.Naam = collection["Naam"];
+                locatie.Temperatuur = Convert.ToDouble(collection["Temperatuur"]);
+
+                locatieService.Update(locatie);
 
                 return RedirectToAction("Index");
             }

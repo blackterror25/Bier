@@ -13,10 +13,10 @@ namespace Bier.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class beerEntities : DbContext
+    public partial class BeerEntities : DbContext
     {
-        public beerEntities()
-            : base("name=beerEntities")
+        public BeerEntities()
+            : base("name=BeerEntities")
         {
         }
     

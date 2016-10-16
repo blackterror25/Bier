@@ -27,5 +27,15 @@ namespace Bier.Service
         {
             locatieDAO.VoegLocatieToe(locatie);
         }
+
+        public Locatie GetLocatiePerId(int id)
+        {
+            return locatieDAO.GetLocatiePerId(id);
+        }
+
+        public void Update(Locatie locatie)
+        {
+            locatieDAO.Update(locatie);
+        }
     }
 }

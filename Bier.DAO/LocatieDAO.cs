@@ -17,7 +17,7 @@ namespace Bier.DAO
     {
         public IEnumerable<Locatie> getAllLocationsPerUser(string userId)
         {
-            using (var db = new beerEntities())
+            using (var db = new BeerEntities())
             {
                 return db.Locatie.Where(l => l.AspNetUsersId == userId).ToList();
             }
@@ -25,9 +25,26 @@ namespace Bier.DAO
 
         public void VoegLocatieToe(Locatie locatie)
         {
-            using (var db = new beerEntities())
+            using (var db = new BeerEntities())
             {
                 db.Entry(locatie).State = EntityState.Added;
+                db.SaveChanges();
+            }
+        }
+
+        public Locatie GetLocatiePerId(int id)
+        {
+            using (var db = new BeerEntities())
+            {
+                return db.Locatie.Where(l => l.Id == id).First();
+            }
+        }
+
+        public void Update(Locatie locatie)
+        {
+            using (var db = new BeerEntities())
+            {
+                db.Entry(locatie).State = EntityState.Modified;
                 db.SaveChanges();
             }
         }

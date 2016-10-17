@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using System.Data.Entity;
+
 using Bier.Model;
 
 namespace Bier.DAO
@@ -23,6 +25,15 @@ namespace Bier.DAO
             using (var db = new BeerEntities())
             {
                 return db.Inhoud.Where(i => i.AspNetUsersId.Equals(id)).ToList();
+            }
+        }
+
+        public static void VoegInhoudToe(Inhoud inhoud)
+        {
+            using (var db = new BeerEntities())
+            {
+                db.Entry(inhoud).State = EntityState.Added;
+                db.SaveChanges();
             }
         }
     }

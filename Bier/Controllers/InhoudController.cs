@@ -27,11 +27,11 @@ namespace Bier.Controllers
             return View(inhoud);
         }
 
-        // GET: Inhoud/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
+        //// GET: Inhoud/Details/5
+        //public ActionResult Details(int id)
+        //{
+        //    return View();
+        //}
 
         // GET: Inhoud/Create
         public ActionResult Create()
@@ -45,7 +45,14 @@ namespace Bier.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                inhoud = new Inhoud();
+                inhoudService = new InhoudService();
+
+                inhoud.AspNetUsersId = User.Identity.GetUserId();
+                inhoud.Capaciteit = Convert.ToDouble(collection["Capaciteit"]);
+                inhoud.Eenheid = collection["Eenheid"];
+
+                inhoudService.VoegInhoudToe(inhoud);
 
                 return RedirectToAction("Index");
             }

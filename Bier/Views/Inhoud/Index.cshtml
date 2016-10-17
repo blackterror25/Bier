@@ -1,13 +1,13 @@
 ﻿@model IEnumerable<Bier.Model.Inhoud>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Index met inhoud";
 }
 
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Voeg nieuwe inhoudshoeveelheid toe", "Create")
 </p>
 <table class="table">
     <tr>
@@ -32,9 +32,9 @@
             <td>
                 @if ((item.AspNetUsersId) != null)
                 {
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    @Html.ActionLink("Bewerken", "Edit", new { id = item.Id })
                     <text> | </text>
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Verwijder", "Delete", new { id = item.Id })
                 }
             </td>
         </tr>

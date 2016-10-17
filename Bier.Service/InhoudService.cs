@@ -22,5 +22,10 @@ namespace Bier.Service
         {
             return InhoudDAO.GetInhoudPerUserId(id);
         }
+
+        public void VoegInhoudToe(Inhoud inhoud)
+        {
+            InhoudDAO.VoegInhoudToe(inhoud);
+        }
     }
 }

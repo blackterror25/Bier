@@ -10,20 +10,20 @@
         <EntityTypeShape EntityType="beerModel.AspNetUserLogins" Width="1.5" PointX="0.875" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="beerModel.AspNetUsers" Width="1.5" PointX="3.5" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="beerModel.Bier" Width="1.5" PointX="10.125" PointY="10.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="beerModel.Inhoud" Width="1.5" PointX="6.875" PointY="12" IsExpanded="true" />
         <EntityTypeShape EntityType="beerModel.Item" Width="1.5" PointX="7.25" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="beerModel.Locatie" Width="1.5" PointX="6.125" PointY="4.375" IsExpanded="true" />
         <AssociationConnector Association="beerModel.FKAspNetUser367573" ManuallyRouted="false" />
         <AssociationConnector Association="beerModel.FKAspNetUser755613" ManuallyRouted="false" />
         <AssociationConnector Association="beerModel.FKBier328768" ManuallyRouted="false" />
-        <AssociationConnector Association="beerModel.FKInhoud986990" ManuallyRouted="false" />
         <AssociationConnector Association="beerModel.FKItem547871" ManuallyRouted="false" />
         <AssociationConnector Association="beerModel.FKLocatie639258" ManuallyRouted="false" />
-        <AssociationConnector Association="beerModel.FKBier353157" ManuallyRouted="false" />
         <AssociationConnector Association="beerModel.FKItem979642" ManuallyRouted="false" />
         <AssociationConnector Association="beerModel.FKItem887979" ManuallyRouted="false" />
         <AssociationConnector Association="beerModel.AspNetUserRoles" ManuallyRouted="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="beerModel.Inhoud" Width="1.5" PointX="6.75" PointY="12.125" />
+        <AssociationConnector Association="beerModel.FKInhoud986990" />
+        <AssociationConnector Association="beerModel.FKBier353157" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

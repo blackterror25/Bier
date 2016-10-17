@@ -29,8 +29,8 @@ namespace Bier.Model
         public string Barcode { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual Inhoud Inhoud { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Item> Item { get; set; }
+        public virtual Inhoud Inhoud { get; set; }
     }
 }

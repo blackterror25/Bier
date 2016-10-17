@@ -4,14 +4,27 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using Microsoft.AspNet.Identity;
+
+using Bier.Model;
+using Bier.Service;
+
 namespace Bier.Controllers
 {
     public class InhoudController : Controller
     {
+        Inhoud inhoud;
+        InhoudService inhoudService;
+
         // GET: Inhoud
         public ActionResult Index()
         {
-            return View();
+            inhoudService = new InhoudService();
+
+            var inhoud = inhoudService.GetPublicInhoud();
+            inhoud.AddRange(inhoudService.GetInhoudPerUserId(User.Identity.GetUserId()));
+
+            return View(inhoud);
         }
 
         // GET: Inhoud/Details/5

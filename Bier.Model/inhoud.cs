@@ -22,8 +22,8 @@ namespace Bier.Model
     
         public int Id { get; set; }
         public string AspNetUsersId { get; set; }
-        public Nullable<double> Inhoud1 { get; set; }
         public string Eenheid { get; set; }
+        public Nullable<double> Capaciteit { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -29,7 +29,13 @@ namespace Bier.Controllers
         {
             locatieService = new LocatieService();
             var userId = User.Identity.GetUserId();
-            var locationList = locatieService.GetAllLocationsPerUser(userId);
+            bool showPublicLocatie = UserService.GetShowPublicLocatie(userId);
+
+            var locationList = new List<Locatie>();
+
+            if (showPublicLocatie) locationList = locatieService.GetAllLocationsPerUser(null).ToList();
+
+            locationList.AddRange(locatieService.GetAllLocationsPerUser(userId).ToList());
 
             return View(locationList);
         }
@@ -77,9 +83,10 @@ namespace Bier.Controllers
 
             locatie = locatieService.GetLocatiePerId(Convert.ToInt32(id));
 
-            if (locatie == null)
+            // Is locatie niet gevonden? heeft geen userID en dus openbaar? of is userID van andere persoon?
+            if (locatie == null || locatie.AspNetUsersId == (null) || !(locatie.AspNetUsersId.Equals(User.Identity.GetUserId())))
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
             return View(locatie);
@@ -116,25 +123,43 @@ namespace Bier.Controllers
         }
 
         // GET: Locatie/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            locatie = new Locatie();
+            locatieService = new LocatieService();
+
+            locatie = locatieService.GetLocatiePerId(Convert.ToInt32(id));
+
+            // Is locatie niet gevonden? heeft geen userID en dus openbaar? of is userID van andere persoon?
+            if (locatie == null || locatie.AspNetUsersId == (null) || !(locatie.AspNetUsersId.Equals(User.Identity.GetUserId())))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            locatieService.RemoveLocatie(id);
+
+            return RedirectToAction("Index", "Locatie");
         }
 
         // POST: Locatie/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+        //[HttpPost]
+        //public ActionResult Delete(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

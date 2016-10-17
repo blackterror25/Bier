@@ -37,5 +37,10 @@ namespace Bier.Service
         {
             locatieDAO.Update(locatie);
         }
+
+        public void RemoveLocatie(int? id)
+        {
+            locatieDAO.RemoveLocatie(id);
+        }
     }
 }

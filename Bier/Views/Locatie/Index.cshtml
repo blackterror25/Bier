@@ -20,19 +20,24 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Naam)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Temperatuur)
-        </td>
-        <td>
-            @Html.ActionLink("Bewerk", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Verwijder", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Temperatuur)
+            </td>
+            <td>
+                @if ((item.AspNetUsersId) != null)
+                {
+                    @Html.ActionLink("Bewerk", "Edit", new { id = item.Id });
+                    <text> | </text>
+                    @Html.ActionLink("Verwijder", "Delete", new { id = item.Id });
+                }
+            </td>
+        </tr>
+    }
 
 </table>

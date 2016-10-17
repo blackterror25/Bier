@@ -40,6 +40,16 @@ namespace Bier.DAO
             }
         }
 
+        public void RemoveLocatie(int? id)
+        {
+            using (var db = new BeerEntities())
+            {
+                var locatie = db.Locatie.Where(l => l.Id == id).First();
+                db.Locatie.Remove(locatie);
+                db.SaveChanges();
+            }
+        }
+
         public void Update(Locatie locatie)
         {
             using (var db = new BeerEntities())

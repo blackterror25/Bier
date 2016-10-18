@@ -8,6 +8,7 @@ using Microsoft.AspNet.Identity;
 
 using Bier.Model;
 using Bier.Service;
+using System.Net;
 
 namespace Bier.Controllers
 {
@@ -63,18 +64,55 @@ namespace Bier.Controllers
         }
 
         // GET: Inhoud/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            inhoud = new Inhoud();
+            inhoudService = new InhoudService();
+
+            inhoud = inhoudService.GetInhoudPerId(Convert.ToInt32(id));
+
+
+            // Is inhoud niet gevonden? heeft geen userID en dus openbaar? of is userID van andere persoon?
+            if (inhoud == null || inhoud.AspNetUsersId == (null) || !(inhoud.AspNetUsersId.Equals(User.Identity.GetUserId())))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            return View(inhoud);
         }
 
         // POST: Inhoud/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int? id, FormCollection collection)
         {
             try
             {
-                // TODO: Add update logic here
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                inhoud = new Inhoud();
+                inhoudService = new InhoudService();
+
+                inhoud = inhoudService.GetInhoudPerId(Convert.ToInt32(id));
+                if (inhoud.AspNetUsersId != User.Identity.GetUserId())
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+
+                inhoud = new Inhoud();
+                inhoud.Id = Convert.ToInt32(id);
+                inhoud.AspNetUsersId = User.Identity.GetUserId();
+                inhoud.Capaciteit = Convert.ToDouble(collection["Capaciteit"]);
+                inhoud.Eenheid = collection["Eenheid"];
+
+                inhoudService.Update(inhoud);
 
                 return RedirectToAction("Index");
             }

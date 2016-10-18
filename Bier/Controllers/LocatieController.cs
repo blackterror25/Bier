@@ -102,9 +102,16 @@ namespace Bier.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-
-                //TODO: is locatie volgens ID weldegelijk an deze gebruiker gelinkt?
+                
                 locatieService = new LocatieService();
+                locatie = new Locatie();
+
+                // Is de locatie wel degelijk aan deze gebruiker gelinkt?
+                locatie = locatieService.GetLocatiePerId(Convert.ToInt32(id));
+                if (locatie.AspNetUsersId != User.Identity.GetUserId())
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
                 locatie = new Locatie();
 
                 locatie.Id = Convert.ToInt32(id);

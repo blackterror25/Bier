@@ -27,5 +27,15 @@ namespace Bier.Service
         {
             InhoudDAO.VoegInhoudToe(inhoud);
         }
+
+        public Inhoud GetInhoudPerId(int v)
+        {
+            return InhoudDAO.GetInhoudPerId(v);
+        }
+
+        public void Update(Inhoud inhoud)
+        {
+            InhoudDAO.Update(inhoud);
+        }
     }
 }

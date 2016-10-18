@@ -36,5 +36,22 @@ namespace Bier.DAO
                 db.SaveChanges();
             }
         }
+
+        public static void Update(Inhoud inhoud)
+        {
+            using (var db = new BeerEntities())
+            {
+                db.Entry(inhoud).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public static Inhoud GetInhoudPerId(int id)
+        {
+            using (var db = new BeerEntities())
+            {
+                return db.Inhoud.Where(i => i.Id == id).First();
+            }
+        }
     }
 }

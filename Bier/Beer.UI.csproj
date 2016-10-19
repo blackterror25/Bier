@@ -342,10 +342,10 @@
     <Content Include="Views\Inhoud\Index.cshtml" />
     <Content Include="Views\Inhoud\Create.cshtml" />
     <Content Include="Views\Inhoud\Edit.cshtml" />
+    <Content Include="Views\Bier\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Bier\" />
     <Folder Include="Views\Item\" />
   </ItemGroup>
   <ItemGroup>

@@ -22,7 +22,10 @@ namespace Beer.Controllers
         {
             inhoudService = new InhoudService();
 
-            var inhoud = inhoudService.GetPublicInhoud();
+            List<Inhoud> inhoud = new List<Inhoud>();
+
+            if (UserService.GetShowPublicInhoud(User.Identity.GetUserId())) inhoud.AddRange(inhoudService.GetPublicInhoud());
+
             inhoud.AddRange(inhoudService.GetInhoudPerUserId(User.Identity.GetUserId()));
 
             return View(inhoud);

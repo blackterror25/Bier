@@ -6,19 +6,27 @@ using System.Web.Mvc;
 
 using Beer.Model;
 using Beer.Service;
-
+using Microsoft.AspNet.Identity;
 
 namespace Beer.Controllers
 {
     public class BierController : Controller
     {
         Bier bier;
+        BierService bierService;
+        UserService userService;
 
         // GET: Bier
         public ActionResult Index()
         {
-            bier = new Bier();
-            return View();
+            List<Bier> bier = new List<Bier>();
+            bierService = new BierService();
+            
+            if (UserService.GetShowPublicBier(User.Identity.GetUserId())) bier.AddRange(bierService.GetPublicBier());
+
+            bier.AddRange(bierService.GetBierPerUserId(User.Identity.GetUserId()));
+
+            return View(bier);
         }
 
         // GET: Bier/Details/5

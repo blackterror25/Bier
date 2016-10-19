@@ -9,11 +9,11 @@ using Microsoft.AspNet.Identity;
 
 using System.Data.Entity;
 
-using Bier.Model;
-using Bier.Service;
+using Beer.Model;
+using Beer.Service;
 using System.Net;
 
-namespace Bier.Controllers
+namespace Beer.Controllers
 {
     public class LocatieController : Controller
     {

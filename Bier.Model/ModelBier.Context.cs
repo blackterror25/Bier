@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Bier.Model
+namespace Beer.Model
 {
     using System;
     using System.Data.Entity;

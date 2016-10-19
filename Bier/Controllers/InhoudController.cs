@@ -6,11 +6,11 @@ using System.Web.Mvc;
 
 using Microsoft.AspNet.Identity;
 
-using Bier.Model;
-using Bier.Service;
+using Beer.Model;
+using Beer.Service;
 using System.Net;
 
-namespace Bier.Controllers
+namespace Beer.Controllers
 {
     public class InhoudController : Controller
     {

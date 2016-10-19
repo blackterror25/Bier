@@ -7,7 +7,7 @@ using System.Net.Configuration;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bier.Models
+namespace Beer.Models
 {
     public class ConfirmationEmail
     {

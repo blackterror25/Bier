@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Bier.Model;
+using Beer.Model;
 
 
 
 
 
-namespace Bier.DAO
+namespace Beer.DAO
 {
     public class LocatieDAO
     {

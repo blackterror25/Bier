@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Bier.Model;
-using Bier.DAO;
+using Beer.Model;
+using Beer.DAO;
 
-namespace Bier.Service
+namespace Beer.Service
 {
     public class InhoudService
     {

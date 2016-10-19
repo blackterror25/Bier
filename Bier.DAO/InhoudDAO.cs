@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 using System.Data.Entity;
 
-using Bier.Model;
+using Beer.Model;
 
-namespace Bier.DAO
+namespace Beer.DAO
 {
     public class InhoudDAO
     {

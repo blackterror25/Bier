@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using Bier.Models;
+using Beer.Models;
 
-namespace Bier
+namespace Beer
 {
     public partial class Startup
     {

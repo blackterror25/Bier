@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bier", "Bier\Bier.csproj", "{23A55143-4106-4E87-9999-748B7466611F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beer.UI", "Bier\Beer.UI.csproj", "{23A55143-4106-4E87-9999-748B7466611F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bier.Model", "Bier.Model\Bier.Model.csproj", "{9A0489B9-790D-4281-89C5-BBC4D61CA40E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beer.Model", "Bier.Model\Beer.Model.csproj", "{9A0489B9-790D-4281-89C5-BBC4D61CA40E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bier.Service", "Bier.Service\Bier.Service.csproj", "{C0D79DF2-4738-4A73-9C5B-B608B55D905D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beer.Service", "Bier.Service\Beer.Service.csproj", "{C0D79DF2-4738-4A73-9C5B-B608B55D905D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bier.DAO", "Bier.DAO\Bier.DAO.csproj", "{3A873AF8-6593-40A3-A346-BA4D5A0AD0B0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Beer.DAO", "Bier.DAO\Beer.DAO.csproj", "{3A873AF8-6593-40A3-A346-BA4D5A0AD0B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

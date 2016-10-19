@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Bier
+namespace Beer
 {
     public class FilterConfig
     {

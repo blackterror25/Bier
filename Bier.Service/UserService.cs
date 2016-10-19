@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Bier.DAO;
-using Bier.Model;
+using Beer.DAO;
+using Beer.Model;
 
-namespace Bier.Service
+namespace Beer.Service
 {
     public class UserService
     {

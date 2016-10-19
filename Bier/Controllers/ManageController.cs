@@ -6,11 +6,11 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Bier.Models;
 
-using Bier.Service;
+using Beer.Models;
+using Beer.Service;
 
-namespace Bier.Controllers
+namespace Beer.Controllers
 {
     [Authorize]
     public class ManageController : Controller

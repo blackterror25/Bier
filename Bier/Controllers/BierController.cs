@@ -4,13 +4,20 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Bier.Controllers
+using Beer.Model;
+using Beer.Service;
+
+
+namespace Beer.Controllers
 {
     public class BierController : Controller
     {
+        Bier bier;
+
         // GET: Bier
         public ActionResult Index()
         {
+            bier = new Bier();
             return View();
         }
 

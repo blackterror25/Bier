@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using Beer.Model;
 using Beer.Service;
 using Microsoft.AspNet.Identity;
+using System.Net;
 
 namespace Beer.Controllers
 {
@@ -21,7 +22,7 @@ namespace Beer.Controllers
         {
             List<Bier> bier = new List<Bier>();
             bierService = new BierService();
-            
+
             if (UserService.GetShowPublicBier(User.Identity.GetUserId())) bier.AddRange(bierService.GetPublicBier());
 
             bier.AddRange(bierService.GetBierPerUserId(User.Identity.GetUserId()));
@@ -30,7 +31,7 @@ namespace Beer.Controllers
         }
 
         // GET: Bier/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
             return View();
         }
@@ -58,9 +59,25 @@ namespace Beer.Controllers
         }
 
         // GET: Bier/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            bierService = new BierService();
+            bier = new Bier();
+
+            bier = bierService.GetBierPerId(id);
+
+            if (bier == null || bier.AspNetUsersId == null || bier.AspNetUsersId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+
+            return View(bier);
         }
 
         // POST: Bier/Edit/5

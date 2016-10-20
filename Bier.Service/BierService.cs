@@ -23,5 +23,10 @@ namespace Beer.Service
         {
             return BierDAO.GetBierPerUserId(v);
         }
+
+        public Bier GetBierPerId(int? id)
+        {
+            return BierDAO.GetBierPerId(id);
+        }
     }
 }

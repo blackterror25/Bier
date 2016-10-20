@@ -24,5 +24,13 @@ namespace Beer.DAO
                 return db.Bier.Where(b => b.AspNetUsersId == v).ToList();
             }
         }
+
+        public static Bier GetBierPerId(int? id)
+        {
+            using (var db = new BeerEntities())
+            {
+                return db.Bier.Where(b => b.Id == id).First();
+            }
+        }
     }
 }

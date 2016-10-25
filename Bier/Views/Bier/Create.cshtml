@@ -1,12 +1,14 @@
 ﻿@model Beer.Model.Bier
 
+
+
 @{
-    ViewBag.Title = "Create";
+        ViewBag.Title = "Voeg nieuw bier toe";
 }
 
-<h2>Create</h2>
+<h2>Voeg nieuw bier toe</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("Index", "Inhoud")) 
 {
     @Html.AntiForgeryToken()
     
@@ -32,10 +34,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.InhoudId, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Inhoud, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.InhoudId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.InhoudId, "", new { @class = "text-danger" })
+                @Html.DropDownList("Inhoud", null, htmlAttributes: new { @class = "form-control", @id = "InhoudList"})
+                @Html.ValidationMessageFor(model => model.Inhoud.Capaciteit, "", new { @class = "text-danger" })
             </div>
         </div>
 

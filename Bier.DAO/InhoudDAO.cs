@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 
 using Beer.Model;
+using Beer.ExtensionMethods;
 
 namespace Beer.DAO
 {
     public class InhoudDAO
     {
-        public List<Inhoud> GetPublicInhoud()
+        public List<Model.Inhoud> GetPublicInhoud()
         {
             using (var db = new BeerEntities())
             {
@@ -20,7 +21,7 @@ namespace Beer.DAO
             }
         }
 
-        public static IEnumerable<Inhoud> GetInhoudPerUserId(String id)
+        public static IEnumerable<Model.Inhoud> GetInhoudPerUserId(String id)
         {
             using (var db = new BeerEntities())
             {
@@ -28,7 +29,7 @@ namespace Beer.DAO
             }
         }
 
-        public static void VoegInhoudToe(Inhoud inhoud)
+        public static void VoegInhoudToe(Model.Inhoud inhoud)
         {
             using (var db = new BeerEntities())
             {
@@ -37,7 +38,7 @@ namespace Beer.DAO
             }
         }
 
-        public static void Update(Inhoud inhoud)
+        public static void Update(Model.Inhoud inhoud)
         {
             using (var db = new BeerEntities())
             {
@@ -46,7 +47,7 @@ namespace Beer.DAO
             }
         }
 
-        public static Inhoud GetInhoudPerId(int id)
+        public static Model.Inhoud GetInhoudPerId(int id)
         {
             using (var db = new BeerEntities())
             {

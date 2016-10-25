@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Beer.Model;
+using Beer.ExtensionMethods;
 using Beer.DAO;
 
 namespace Beer.Service
@@ -12,28 +13,28 @@ namespace Beer.Service
     public class InhoudService
     {
         InhoudDAO inhoudDAO;
-        public List<Inhoud> GetPublicInhoud()
+        public List<Model.Inhoud> GetPublicInhoud()
         {
             inhoudDAO = new InhoudDAO();
             return inhoudDAO.GetPublicInhoud();
         }
 
-        public IEnumerable<Inhoud> GetInhoudPerUserId(String id)
+        public IEnumerable<Model.Inhoud> GetInhoudPerUserId(String id)
         {
             return InhoudDAO.GetInhoudPerUserId(id);
         }
 
-        public void VoegInhoudToe(Inhoud inhoud)
+        public void VoegInhoudToe(Model.Inhoud inhoud)
         {
             InhoudDAO.VoegInhoudToe(inhoud);
         }
 
-        public Inhoud GetInhoudPerId(int v)
+        public Model.Inhoud GetInhoudPerId(int v)
         {
             return InhoudDAO.GetInhoudPerId(v);
         }
 
-        public void Update(Inhoud inhoud)
+        public void Update(Model.Inhoud inhoud)
         {
             InhoudDAO.Update(inhoud);
         }

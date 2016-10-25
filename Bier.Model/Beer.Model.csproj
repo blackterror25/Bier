@@ -7,8 +7,8 @@
     <ProjectGuid>{9A0489B9-790D-4281-89C5-BBC4D61CA40E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bier.Model</RootNamespace>
-    <AssemblyName>Bier.Model</AssemblyName>
+    <RootNamespace>Beer.Model</RootNamespace>
+    <AssemblyName>Beer.Model</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

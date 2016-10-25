@@ -6,6 +6,8 @@ using System.Web.Mvc;
 
 using Beer.Model;
 using Beer.Service;
+using Beer.ExtensionMethods;
+
 using Microsoft.AspNet.Identity;
 using System.Net;
 
@@ -39,6 +41,26 @@ namespace Beer.Controllers
         // GET: Bier/Create
         public ActionResult Create()
         {
+            InhoudService inhoudService = new InhoudService();
+            List<Inhoud> inhoudList = new List<Inhoud>();
+
+            if (UserService.GetShowPublicInhoud(User.Identity.GetUserId()))
+            {
+                inhoudList.AddRange(inhoudService.GetPublicInhoud());
+            }
+
+            inhoudList.AddRange(inhoudService.GetInhoudPerUserId(User.Identity.GetUserId()));
+
+            Dictionary<int, String> inhoudDic = new Dictionary<int, string>();
+
+
+            var inhFix = inhoudList.Select(i => new { Id = i.Id, Name = (i.Capaciteit + " " + i.Eenheid) }).ToList();
+            
+            ViewBag.Inhoud = new SelectList(inhFix, "Id", "Name");
+
+
+
+
             return View();
         }
 
@@ -48,7 +70,6 @@ namespace Beer.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
 
                 return RedirectToAction("Index");
             }

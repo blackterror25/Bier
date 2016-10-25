@@ -22,7 +22,7 @@ namespace Beer.Model
         public bool Openbaar { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual Bier Bier { get; set; }
         public virtual Locatie Locatie { get; set; }
+        public virtual Bier Bier { get; set; }
     }
 }

@@ -25,12 +25,12 @@ namespace Beer.Model
         public string AspNetUsersId { get; set; }
         public string Naam { get; set; }
         public string Label { get; set; }
-        public string Temperatuur { get; set; }
+        public int Temperatuur { get; set; }
         public string Barcode { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
+        public virtual Inhoud Inhoud { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Item> Item { get; set; }
-        public virtual Inhoud Inhoud { get; set; }
     }
 }

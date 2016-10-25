@@ -29,9 +29,9 @@ namespace Beer.Model
         public virtual DbSet<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual DbSet<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual DbSet<AspNetUsers> AspNetUsers { get; set; }
-        public virtual DbSet<Bier> Bier { get; set; }
         public virtual DbSet<Item> Item { get; set; }
         public virtual DbSet<Locatie> Locatie { get; set; }
         public virtual DbSet<Inhoud> Inhoud { get; set; }
+        public virtual DbSet<Bier> Bier { get; set; }
     }
 }

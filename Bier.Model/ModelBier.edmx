@@ -72,7 +72,7 @@ warning 6002: The table/view 'def.beer.AspNetUserRoles' does not have a primary 
           <Property Name="AspNetUsersId" Type="varchar" MaxLength="100" />
           <Property Name="Naam" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="Label" Type="varchar" MaxLength="255" />
-          <Property Name="Temperatuur" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Temperatuur" Type="int" Nullable="false" />
           <Property Name="Barcode" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Inhoud">
@@ -349,7 +349,6 @@ FROM `AspNetUserRoles` AS `AspNetUserRoles`</DefiningQuery>
           <Property Name="City" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FKAspNetUser367573" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
           <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FKAspNetUser755613" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
-          <NavigationProperty Name="Bier" Relationship="Self.FKBier328768" FromRole="AspNetUsers" ToRole="Bier" />
           <NavigationProperty Name="Item" Relationship="Self.FKItem547871" FromRole="AspNetUsers" ToRole="Item" />
           <NavigationProperty Name="Locatie" Relationship="Self.FKLocatie639258" FromRole="AspNetUsers" ToRole="Locatie" />
           <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
@@ -357,21 +356,7 @@ FROM `AspNetUserRoles` AS `AspNetUserRoles`</DefiningQuery>
           <Property Name="ShowPublicInhoud" Type="Boolean" Nullable="false" />
           <Property Name="ShowPublicBier" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="Inhoud" Relationship="beerModel.FKInhoud986990" FromRole="AspNetUsers" ToRole="Inhoud" />
-        </EntityType>
-        <EntityType Name="Bier">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="InhoudId" Type="Int32" Nullable="false" />
-          <Property Name="AspNetUsersId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Naam" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Label" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Temperatuur" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Barcode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="AspNetUsers" Relationship="Self.FKBier328768" FromRole="Bier" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Item" Relationship="Self.FKItem979642" FromRole="Bier" ToRole="Item" />
-          <NavigationProperty Name="Inhoud" Relationship="beerModel.FKBier353157" FromRole="Bier" ToRole="Inhoud" />
+          <NavigationProperty Name="Bier" Relationship="beerModel.FKBier328768" FromRole="AspNetUsers" ToRole="Bier" />
         </EntityType>
         <EntityType Name="Item">
           <Key>
@@ -384,8 +369,8 @@ FROM `AspNetUserRoles` AS `AspNetUserRoles`</DefiningQuery>
           <Property Name="Aantal" Type="Int32" Nullable="false" />
           <Property Name="Openbaar" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="AspNetUsers" Relationship="Self.FKItem547871" FromRole="Item" ToRole="AspNetUsers" />
-          <NavigationProperty Name="Bier" Relationship="Self.FKItem979642" FromRole="Item" ToRole="Bier" />
           <NavigationProperty Name="Locatie" Relationship="Self.FKItem887979" FromRole="Item" ToRole="Locatie" />
+          <NavigationProperty Name="Bier" Relationship="beerModel.FKItem979642" FromRole="Item" ToRole="Bier" />
         </EntityType>
         <EntityType Name="Locatie">
           <Key>
@@ -422,18 +407,6 @@ FROM `AspNetUserRoles` AS `AspNetUserRoles`</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FKBier328768">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-          <End Role="Bier" Type="Self.Bier" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Bier">
-              <PropertyRef Name="AspNetUsersId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FKItem547871">
           <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
           <End Role="Item" Type="Self.Item" Multiplicity="*" />
@@ -458,18 +431,6 @@ FROM `AspNetUserRoles` AS `AspNetUserRoles`</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FKItem979642">
-          <End Role="Bier" Type="Self.Bier" Multiplicity="1" />
-          <End Role="Item" Type="Self.Item" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Bier">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Item">
-              <PropertyRef Name="Bierid" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FKItem887979">
           <End Role="Locatie" Type="Self.Locatie" Multiplicity="1" />
           <End Role="Item" Type="Self.Item" Multiplicity="*" />
@@ -491,7 +452,6 @@ FROM `AspNetUserRoles` AS `AspNetUserRoles`</DefiningQuery>
           <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" />
           <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" />
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" />
-          <EntitySet Name="Bier" EntityType="Self.Bier" />
           <EntitySet Name="Item" EntityType="Self.Item" />
           <EntitySet Name="Locatie" EntityType="Self.Locatie" />
           <AssociationSet Name="FKAspNetUser367573" Association="Self.FKAspNetUser367573">
@@ -502,10 +462,6 @@ FROM `AspNetUserRoles` AS `AspNetUserRoles`</DefiningQuery>
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
           </AssociationSet>
-          <AssociationSet Name="FKBier328768" Association="Self.FKBier328768">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Bier" EntitySet="Bier" />
-          </AssociationSet>
           <AssociationSet Name="FKItem547871" Association="Self.FKItem547871">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Item" EntitySet="Item" />
@@ -513,10 +469,6 @@ FROM `AspNetUserRoles` AS `AspNetUserRoles`</DefiningQuery>
           <AssociationSet Name="FKLocatie639258" Association="Self.FKLocatie639258">
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Locatie" EntitySet="Locatie" />
-          </AssociationSet>
-          <AssociationSet Name="FKItem979642" Association="Self.FKItem979642">
-            <End Role="Bier" EntitySet="Bier" />
-            <End Role="Item" EntitySet="Item" />
           </AssociationSet>
           <AssociationSet Name="FKItem887979" Association="Self.FKItem887979">
             <End Role="Locatie" EntitySet="Locatie" />
@@ -531,9 +483,18 @@ FROM `AspNetUserRoles` AS `AspNetUserRoles`</DefiningQuery>
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Inhoud" EntitySet="Inhoud" />
           </AssociationSet>
+          <EntitySet Name="Bier" EntityType="beerModel.Bier" />
+          <AssociationSet Name="FKBier328768" Association="beerModel.FKBier328768">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Bier" EntitySet="Bier" />
+          </AssociationSet>
           <AssociationSet Name="FKBier353157" Association="beerModel.FKBier353157">
             <End Role="Inhoud" EntitySet="Inhoud" />
             <End Role="Bier" EntitySet="Bier" />
+          </AssociationSet>
+          <AssociationSet Name="FKItem979642" Association="beerModel.FKItem979642">
+            <End Role="Bier" EntitySet="Bier" />
+            <End Role="Item" EntitySet="Item" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Inhoud">
@@ -559,6 +520,33 @@ FROM `AspNetUserRoles` AS `AspNetUserRoles`</DefiningQuery>
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Bier">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InhoudId" Type="Int32" Nullable="false" />
+          <Property Name="AspNetUsersId" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Naam" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Label" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Temperatuur" Type="Int32" Nullable="false" />
+          <Property Name="Barcode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AspNetUsers" Relationship="beerModel.FKBier328768" FromRole="Bier" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Inhoud" Relationship="beerModel.FKBier353157" FromRole="Bier" ToRole="Inhoud" />
+          <NavigationProperty Name="Item" Relationship="beerModel.FKItem979642" FromRole="Bier" ToRole="Item" />
+        </EntityType>
+        <Association Name="FKBier328768">
+          <End Type="beerModel.AspNetUsers" Role="AspNetUsers" Multiplicity="0..1" />
+          <End Type="beerModel.Bier" Role="Bier" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bier">
+              <PropertyRef Name="AspNetUsersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FKBier353157">
           <End Type="beerModel.Inhoud" Role="Inhoud" Multiplicity="1" />
           <End Type="beerModel.Bier" Role="Bier" Multiplicity="*" />
@@ -568,6 +556,18 @@ FROM `AspNetUserRoles` AS `AspNetUserRoles`</DefiningQuery>
             </Principal>
             <Dependent Role="Bier">
               <PropertyRef Name="InhoudId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FKItem979642">
+          <End Type="beerModel.Bier" Role="Bier" Multiplicity="1" />
+          <End Type="beerModel.Item" Role="Item" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bier">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Item">
+              <PropertyRef Name="Bierid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -629,19 +629,6 @@ FROM `AspNetUserRoles` AS `AspNetUserRoles`</DefiningQuery>
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Bier">
-            <EntityTypeMapping TypeName="beerModel.Bier">
-              <MappingFragment StoreEntitySet="Bier">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="InhoudId" ColumnName="InhoudId" />
-                <ScalarProperty Name="AspNetUsersId" ColumnName="AspNetUsersId" />
-                <ScalarProperty Name="Naam" ColumnName="Naam" />
-                <ScalarProperty Name="Label" ColumnName="Label" />
-                <ScalarProperty Name="Temperatuur" ColumnName="Temperatuur" />
-                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Item">
             <EntityTypeMapping TypeName="beerModel.Item">
               <MappingFragment StoreEntitySet="Item">
@@ -678,6 +665,19 @@ FROM `AspNetUserRoles` AS `AspNetUserRoles`</DefiningQuery>
                 <ScalarProperty Name="Capaciteit" ColumnName="Capaciteit" />
                 <ScalarProperty Name="Eenheid" ColumnName="Eenheid" />
                 <ScalarProperty Name="AspNetUsersId" ColumnName="AspNetUsersId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bier">
+            <EntityTypeMapping TypeName="beerModel.Bier">
+              <MappingFragment StoreEntitySet="Bier">
+                <ScalarProperty Name="Barcode" ColumnName="Barcode" />
+                <ScalarProperty Name="Temperatuur" ColumnName="Temperatuur" />
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="Naam" ColumnName="Naam" />
+                <ScalarProperty Name="AspNetUsersId" ColumnName="AspNetUsersId" />
+                <ScalarProperty Name="InhoudId" ColumnName="InhoudId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

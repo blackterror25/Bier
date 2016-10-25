@@ -8,7 +8,7 @@
 
 <h2>Voeg nieuw bier toe</h2>
 
-@using (Html.BeginForm("Index", "Inhoud")) 
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
@@ -36,7 +36,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Inhoud, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("Inhoud", null, htmlAttributes: new { @class = "form-control", @id = "InhoudList"})
+                @Html.DropDownList("Inhoud", null, htmlAttributes: new { @class = "form-control", @id = "Inhoud" })
                 @Html.ValidationMessageFor(model => model.Inhoud.Capaciteit, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -44,7 +44,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Temperatuur, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Temperatuur, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Temperatuur, new { htmlAttributes = new { @type = "number", @min = "-50", @step = "0.1", @max = "50", @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Temperatuur, "", new { @class = "text-danger" })
             </div>
         </div>

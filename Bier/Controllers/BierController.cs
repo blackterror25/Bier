@@ -6,7 +6,6 @@ using System.Web.Mvc;
 
 using Beer.Model;
 using Beer.Service;
-using Beer.ExtensionMethods;
 
 using Microsoft.AspNet.Identity;
 using System.Net;
@@ -50,17 +49,11 @@ namespace Beer.Controllers
             }
 
             inhoudList.AddRange(inhoudService.GetInhoudPerUserId(User.Identity.GetUserId()));
-
-            Dictionary<int, String> inhoudDic = new Dictionary<int, string>();
-
-
-            var inhFix = inhoudList.Select(i => new { Id = i.Id, Name = (i.Capaciteit + " " + i.Eenheid) }).ToList();
+            var inhFix = inhoudList.Select(i => new { Id = i.Id, Name = (i.Capaciteit + " " + i.Eenheid) });
             
             ViewBag.Inhoud = new SelectList(inhFix, "Id", "Name");
-
-
-
-
+            
+            
             return View();
         }
 
@@ -70,6 +63,17 @@ namespace Beer.Controllers
         {
             try
             {
+                bier = new Bier();
+                bierService = new BierService();
+
+                bier.AspNetUsersId = User.Identity.GetUserId();
+                bier.Naam = collection["Naam"];
+                bier.Label = collection["Label"];
+                bier.InhoudId = Convert.ToInt32(collection["Inhoud"]);
+                bier.Temperatuur = Convert.ToInt32(collection["Temperatuur"]);
+                bier.Barcode = collection["Barcode"];
+
+                bierService.BierToevoegen(bier);
 
                 return RedirectToAction("Index");
             }

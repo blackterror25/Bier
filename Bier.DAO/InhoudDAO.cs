@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 
 using Beer.Model;
-using Beer.ExtensionMethods;
 
 namespace Beer.DAO
 {

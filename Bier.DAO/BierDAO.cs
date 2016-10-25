@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 using Beer.Model;
 
 namespace Beer.DAO
@@ -30,6 +31,15 @@ namespace Beer.DAO
             using (var db = new BeerEntities())
             {
                 return db.Bier.Where(b => b.Id == id).First();
+            }
+        }
+
+        public void BierToevoegen(Bier bier)
+        {
+            using (var db = new BeerEntities())
+            {
+                db.Bier.Add(bier);
+                db.SaveChanges();
             }
         }
     }

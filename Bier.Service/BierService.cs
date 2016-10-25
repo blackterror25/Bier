@@ -12,7 +12,7 @@ namespace Beer.Service
 {
     public class BierService
     {
-        Bier bier;
+        BierDAO bierDAO;
 
         public List<Bier> GetPublicBier()
         {
@@ -27,6 +27,13 @@ namespace Beer.Service
         public Bier GetBierPerId(int? id)
         {
             return BierDAO.GetBierPerId(id);
+        }
+
+        public void BierToevoegen(Bier bier)
+        {
+            bierDAO = new BierDAO();
+
+            bierDAO.BierToevoegen(bier);
         }
     }
 }

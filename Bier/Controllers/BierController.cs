@@ -40,8 +40,9 @@ namespace Beer.Controllers
         // GET: Bier/Create
         public ActionResult Create()
         {
-            InhoudService inhoudService = new InhoudService();
             List<Inhoud> inhoudList = new List<Inhoud>();
+            InhoudService inhoudService = new InhoudService();
+
 
             if (UserService.GetShowPublicInhoud(User.Identity.GetUserId()))
             {
@@ -49,11 +50,11 @@ namespace Beer.Controllers
             }
 
             inhoudList.AddRange(inhoudService.GetInhoudPerUserId(User.Identity.GetUserId()));
-            var inhFix = inhoudList.Select(i => new { Id = i.Id, Name = (i.Capaciteit + " " + i.Eenheid) });
-            
-            ViewBag.Inhoud = new SelectList(inhFix, "Id", "Name");
-            
-            
+            var inhFix = inhoudList.Select(i => new { InhoudId = i.Id, Name = (i.Capaciteit + " " + i.Eenheid) });
+
+            ViewBag.Inhoud = inhoudList.Select(i => new { InhoudId = i.Id, Name = (i.Capaciteit + " " + i.Eenheid) });
+
+
             return View();
         }
 
@@ -122,9 +123,27 @@ namespace Beer.Controllers
         }
 
         // GET: Bier/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
-            return View();
+            if (id == null) return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            bierService = new BierService();
+            bier = new Bier();
+
+            bier = bierService.GetBierPerId(id);
+
+            if (bier == null || bier.AspNetUsersId == null || bier.AspNetUsersId != User.Identity.GetUserId())
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            else
+            {
+                bierService.DeleteBier(bier);
+                return RedirectToAction("Index", "Bier");
+            }
+
+
+
         }
 
         // POST: Bier/Delete/5

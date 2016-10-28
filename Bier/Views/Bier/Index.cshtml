@@ -21,6 +21,9 @@
             @Html.DisplayNameFor(model => model.Temperatuur)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.Inhoud)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Barcode)
         </th>
         <th></th>
@@ -37,6 +40,10 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Temperatuur)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Inhoud.Capaciteit)
+                @Html.DisplayFor(modelItem => item.Inhoud.Eenheid)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Barcode)

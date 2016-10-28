@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 using Beer.Model;
 
@@ -14,7 +15,7 @@ namespace Beer.DAO
         {
             using (var db = new BeerEntities())
             {
-                return db.Bier.Where(b => b.AspNetUsersId == null).ToList();
+                return db.Bier.Include(b => b.Inhoud).Where(b => b.AspNetUsersId == null).ToList();
             }
         }
 
@@ -22,7 +23,7 @@ namespace Beer.DAO
         {
             using (var db = new BeerEntities())
             {
-                return db.Bier.Where(b => b.AspNetUsersId == v).ToList();
+                return db.Bier.Include(b => b.Inhoud).Where(b => b.AspNetUsersId == v).ToList();
             }
         }
 
@@ -31,6 +32,16 @@ namespace Beer.DAO
             using (var db = new BeerEntities())
             {
                 return db.Bier.Where(b => b.Id == id).First();
+            }
+        }
+
+        public void DeleteBier(Bier b)
+        {
+            using (var db = new BeerEntities())
+            {
+                db.Bier.Attach(b);
+                db.Bier.Remove(b);
+                db.SaveChanges();
             }
         }
 

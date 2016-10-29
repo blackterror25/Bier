@@ -4960,8 +4960,14 @@ a.badge:focus {
   padding-top: 30px;
   padding-bottom: 30px;
   margin-bottom: 30px;
-  color: inherit;
-  background-color: #eee;
+  color: white;
+  -webkit-text-stroke:   1px 1px 0 #000,
+     -1px -1px 0 #000,  
+      1px -1px 0 #000,
+      -1px 1px 0 #000,
+       1px 1px 0 #000;
+  background: url('../images/Beer.gif') no-repeat center top;
+  background-size: cover;
 }
 .jumbotron h1,
 .jumbotron .h1 {

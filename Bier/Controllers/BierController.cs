@@ -111,7 +111,7 @@ namespace Beer.Controllers
             inhoudList.AddRange(inhoudService.GetInhoudPerUserId(User.Identity.GetUserId()));
             var inhFix = inhoudList.Select(i => new { Id = i.Id, Name = (i.Capaciteit + " " + i.Eenheid) });
 
-            ViewBag.Inhoud = new SelectList(inhFix, "Id", "Name");
+            ViewBag.Inhoud = new SelectList(inhFix, "Id", "Name", bier.InhoudId);
 
 
             return View(bier);

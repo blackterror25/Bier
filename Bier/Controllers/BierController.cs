@@ -16,6 +16,7 @@ namespace Beer.Controllers
     {
         Bier bier;
         BierService bierService;
+        UserService userService;
 
         // GET: Bier
         public ActionResult Index()
@@ -99,20 +100,6 @@ namespace Beer.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            List<Inhoud> inhoudList = new List<Inhoud>();
-            InhoudService inhoudService = new InhoudService();
-
-
-            if (UserService.GetShowPublicInhoud(User.Identity.GetUserId()))
-            {
-                inhoudList.AddRange(inhoudService.GetPublicInhoud());
-            }
-
-            inhoudList.AddRange(inhoudService.GetInhoudPerUserId(User.Identity.GetUserId()));
-            var inhFix = inhoudList.Select(i => new { InhoudId = i.Id, Name = (i.Capaciteit + " " + i.Eenheid) });
-
-            ViewBag.Inhoud = (IEnumerable<SelectListItem>)inhoudList.Select(i => new { InhoudId = i.Id, Name = (i.Capaciteit + " " + i.Eenheid) });
 
 
             return View(bier);

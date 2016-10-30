@@ -4367,10 +4367,11 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 }
 .navbar-form {
   padding: 10px 15px;
-  margin-top: 8px;
+  margin: 8px -15px 8px -15px;
+  /*margin-top: 8px;
   margin-right: -15px;
   margin-bottom: 8px;
-  margin-left: -15px;
+  margin-left: -15px;*/
   border-top: 1px solid transparent;
   border-bottom: 1px solid transparent;
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, .1), 0 1px 0 rgba(255, 255, 255, .1);
@@ -4960,14 +4961,6 @@ a.badge:focus {
   padding-top: 30px;
   padding-bottom: 30px;
   margin-bottom: 30px;
-  color: white;
-  -webkit-text-stroke:   1px 1px 0 #000,
-     -1px -1px 0 #000,  
-      1px -1px 0 #000,
-      -1px 1px 0 #000,
-       1px 1px 0 #000;
-  background: url('../images/Beer.gif') no-repeat center top;
-  background-size: cover;
 }
 .jumbotron h1,
 .jumbotron .h1 {

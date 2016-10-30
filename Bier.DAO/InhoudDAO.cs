@@ -12,7 +12,7 @@ namespace Beer.DAO
 {
     public class InhoudDAO
     {
-        public List<Model.Inhoud> GetPublicInhoud()
+        public List<Inhoud> GetPublicInhoud()
         {
             using (var db = new BeerEntities())
             {
@@ -20,7 +20,7 @@ namespace Beer.DAO
             }
         }
 
-        public static IEnumerable<Model.Inhoud> GetInhoudPerUserId(String id)
+        public static IEnumerable<Inhoud> GetInhoudPerUserId(String id)
         {
             using (var db = new BeerEntities())
             {
@@ -28,7 +28,7 @@ namespace Beer.DAO
             }
         }
 
-        public static void VoegInhoudToe(Model.Inhoud inhoud)
+        public static void VoegInhoudToe(Inhoud inhoud)
         {
             using (var db = new BeerEntities())
             {
@@ -37,7 +37,7 @@ namespace Beer.DAO
             }
         }
 
-        public static void Update(Model.Inhoud inhoud)
+        public static void Update(Inhoud inhoud)
         {
             using (var db = new BeerEntities())
             {
@@ -46,7 +46,7 @@ namespace Beer.DAO
             }
         }
 
-        public static Model.Inhoud GetInhoudPerId(int id)
+        public static Inhoud GetInhoudPerId(int id)
         {
             using (var db = new BeerEntities())
             {

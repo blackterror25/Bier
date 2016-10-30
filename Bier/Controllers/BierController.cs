@@ -16,7 +16,6 @@ namespace Beer.Controllers
     {
         Bier bier;
         BierService bierService;
-        UserService userService;
 
         // GET: Bier
         public ActionResult Index()
@@ -101,17 +100,50 @@ namespace Beer.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
+            InhoudService inhoudService = new InhoudService();
+            List<Inhoud> inhoudList = new List<Inhoud>();
+
+            if (UserService.GetShowPublicInhoud(User.Identity.GetUserId()))
+            {
+                inhoudList.AddRange(inhoudService.GetPublicInhoud());
+            }
+
+            inhoudList.AddRange(inhoudService.GetInhoudPerUserId(User.Identity.GetUserId()));
+            var inhFix = inhoudList.Select(i => new { Id = i.Id, Name = (i.Capaciteit + " " + i.Eenheid) });
+
+            ViewBag.Inhoud = new SelectList(inhFix, "Id", "Name");
+
 
             return View(bier);
         }
 
         // POST: Bier/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int? id, FormCollection collection)
         {
             try
             {
-                // TODO: Add update logic here
+                if (id == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                bier = new Bier();
+                bierService = new BierService();
+
+                bier = bierService.GetBierPerId(Convert.ToInt32(id));
+                
+                if (bier.AspNetUsersId != User.Identity.GetUserId())
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                
+                bier.Naam = collection["Naam"];
+                bier.Label = collection["Label"];
+                bier.InhoudId = Convert.ToInt32(collection["Inhoud"]);
+                bier.Temperatuur = Convert.ToInt32(collection["Temperatuur"]);
+                bier.Barcode = collection["Barcode"];
+
+                bierService.BierUpdaten(bier);
 
                 return RedirectToAction("Index");
             }
@@ -127,20 +159,19 @@ namespace Beer.Controllers
             return View();
         }
 
-        // POST: Bier/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //// POST: Bier/Delete/5
+        //[HttpPost]
+        //public ActionResult Delete(int id, FormCollection collection)
+        //{
+        //    try
+        //    {
+        //        return RedirectToAction("Index");
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }

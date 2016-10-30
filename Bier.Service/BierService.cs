@@ -35,5 +35,11 @@ namespace Beer.Service
 
             bierDAO.BierToevoegen(bier);
         }
+
+        public void BierUpdaten(Bier bier)
+        {
+            bierDAO = new BierDAO();
+            bierDAO.BierUpdaten(bier);
+        }
     }
 }

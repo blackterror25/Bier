@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Beer.Model;
+using System.Data.Entity;
 
 namespace Beer.DAO
 {
@@ -14,7 +15,7 @@ namespace Beer.DAO
         {
             using (var db = new BeerEntities())
             {
-                return db.Bier.Where(b => b.AspNetUsersId == null).ToList();
+                return db.Bier.Include(b => b.Inhoud).Where(b => b.AspNetUsersId == null).ToList();
             }
         }
 
@@ -22,7 +23,7 @@ namespace Beer.DAO
         {
             using (var db = new BeerEntities())
             {
-                return db.Bier.Where(b => b.AspNetUsersId == v).ToList();
+                return db.Bier.Include(b => b.Inhoud).Where(b => b.AspNetUsersId == v).ToList();
             }
         }
 
@@ -31,6 +32,15 @@ namespace Beer.DAO
             using (var db = new BeerEntities())
             {
                 return db.Bier.Where(b => b.Id == id).First();
+            }
+        }
+
+        public void BierUpdaten(Bier bier)
+        {
+            using (var db = new BeerEntities())
+            {
+                db.Entry(bier).State = EntityState.Modified;
+                db.SaveChanges();
             }
         }
 

@@ -4,14 +4,28 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+using Beer.Model;
+using Beer.Service;
+
+using Microsoft.AspNet.Identity;
+using System.Net;
+
 namespace Beer.Controllers
 {
     public class ItemController : Controller
     {
+        Item item;
+        ItemService itemService;
+
         // GET: Item
         public ActionResult Index()
         {
-            return View();
+            item = new Item();
+            itemService = new ItemService();
+
+            List<Item> itemList = itemService.GetAllItemsPerUser(User.Identity.GetUserId());
+
+            return View(itemList);
         }
 
         // GET: Item/Details/5
@@ -23,6 +37,26 @@ namespace Beer.Controllers
         // GET: Item/Create
         public ActionResult Create()
         {
+            BierService bierService = new BierService();
+            List<Bier> bierList = new List<Bier>();
+
+            LocatieService locatieService = new LocatieService();
+            List<Locatie> locatieList = new List<Locatie>();
+
+            if (UserService.GetShowPublicBier(User.Identity.GetUserId())) bierList.AddRange(bierService.GetPublicBier());
+            bierList.AddRange(bierService.GetBierPerUserId(User.Identity.GetUserId()));
+            var bierFix = bierList.Select(b => new { Id = b.Id, Name = (b.Naam + " "+ b.Inhoud.Capaciteit + b.Inhoud.Eenheid) });
+
+            ViewBag.BierLijst = new SelectList(bierFix, "Id", "Name");
+
+
+            if (UserService.GetShowPublicLocatie(User.Identity.GetUserId())) locatieList.AddRange(locatieService.GetPublicLocatie());
+            locatieList.AddRange(locatieService.GetAllLocationsPerUser(User.Identity.GetUserId()));
+            var locatieFix = locatieList.Select(l => new { Id = l.Id, Name = l.Naam });
+
+            ViewBag.LocatieLijst = new SelectList(locatieFix, "Id", "Name");
+
+
             return View();
         }
 

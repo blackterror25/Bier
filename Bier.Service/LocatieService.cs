@@ -42,5 +42,10 @@ namespace Beer.Service
         {
             locatieDAO.RemoveLocatie(id);
         }
+
+        public List<Locatie> GetPublicLocatie()
+        {
+            return locatieDAO.GetPublicLocatie();
+        }
     }
 }

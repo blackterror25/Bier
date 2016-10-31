@@ -50,6 +50,14 @@ namespace Beer.DAO
             }
         }
 
+        public List<Locatie> GetPublicLocatie()
+        {
+            using (var db = new BeerEntities())
+            {
+                return db.Locatie.Where(l => l.AspNetUsersId == null).ToList();
+            }
+        }
+
         public void Update(Locatie locatie)
         {
             using (var db = new BeerEntities())

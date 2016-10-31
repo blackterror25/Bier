@@ -262,7 +262,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="images\Beer.gif" />
+    <Content Include="images\jumbotron\Beer0.gif" />
+    <Content Include="images\jumbotron\Beer2.gif" />
+    <Content Include="images\jumbotron\Beer3.gif" />
+    <Content Include="images\jumbotron\Beer1.gif" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -347,10 +350,11 @@
     <Content Include="Views\Bier\Index.cshtml" />
     <Content Include="Views\Bier\Edit.cshtml" />
     <Content Include="Views\Bier\Create.cshtml" />
+    <Content Include="Views\Item\Index.cshtml" />
+    <Content Include="Views\Item\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Item\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

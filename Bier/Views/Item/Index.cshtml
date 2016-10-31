@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Beer.Model.Item>
+
+@{
+    ViewBag.Title = "Item lijst";
+}
+
+<h2>Items</h2>
+
+<p>
+    @Html.ActionLink("Voeg item toe aan lijst", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Bierid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LocatieColumn)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUsersId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Aantal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Openbaar)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bierid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LocatieColumn)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUsersId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Aantal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Openbaar)
+        </td>
+        <td>
+            @Html.ActionLink("Bewerk", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Verwijder", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

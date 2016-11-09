@@ -9,6 +9,8 @@ using Beer.Service;
 
 using Microsoft.AspNet.Identity;
 using System.Net;
+using Aspose.BarCode.BarCodeRecognition;
+using System.IO;
 
 namespace Beer.Controllers
 {
@@ -45,7 +47,7 @@ namespace Beer.Controllers
 
             if (UserService.GetShowPublicBier(User.Identity.GetUserId())) bierList.AddRange(bierService.GetPublicBier());
             bierList.AddRange(bierService.GetBierPerUserId(User.Identity.GetUserId()));
-            var bierFix = bierList.Select(b => new { Id = b.Id, Name = (b.Naam + " "+ b.Inhoud.Capaciteit + b.Inhoud.Eenheid) });
+            var bierFix = bierList.Select(b => new { Id = b.Id, Name = (b.Naam + " " + b.Inhoud.Capaciteit + b.Inhoud.Eenheid) });
 
             ViewBag.BierLijst = new SelectList(bierFix, "Id", "Name");
 
@@ -119,5 +121,13 @@ namespace Beer.Controllers
                 return View();
             }
         }
+
+        public JsonResult Scan(HttpPostedFileBase file)
+        {
+            var f = file;
+
+            return null;
+        }
     }
+
 }

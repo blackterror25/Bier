@@ -28,8 +28,14 @@ namespace Beer
                       "~/Content/site.css"));
 
             bundles.Add(new StyleBundle("~/Content/homepage").Include(
-                "~/Content/homepage.css"
-                ));
+                      "~/Content/homepage.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/BarcodeScanner").Include(
+                      "~/Scripts/jquery.js",
+                      "~/Scripts/Barcode.js"));
+
+            bundles.Add(new StyleBundle("~/bundles/barcodecss").Include(
+                "~/Content/Barcode.css"));
         }
     }
 }

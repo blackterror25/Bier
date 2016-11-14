@@ -4,25 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="519d785b624f459fb25a80ca4e3cab9b" Name="Diagram1">
+      <Diagram DiagramId="519d785b624f459fb25a80ca4e3cab9b" Name="Diagram1" ZoomLevel="95">
         <EntityTypeShape EntityType="beerModel.AspNetRoles" Width="1.5" PointX="0.875" PointY="10.125" IsExpanded="true" />
         <EntityTypeShape EntityType="beerModel.AspNetUserClaims" Width="1.5" PointX="0.875" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="beerModel.AspNetUserLogins" Width="1.5" PointX="0.875" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="beerModel.AspNetUsers" Width="1.5" PointX="3.5" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="beerModel.Item" Width="1.5" PointX="7.25" PointY="7.625" IsExpanded="true" />
         <EntityTypeShape EntityType="beerModel.Locatie" Width="1.5" PointX="6.125" PointY="4.375" IsExpanded="true" />
         <AssociationConnector Association="beerModel.FKAspNetUser367573" ManuallyRouted="false" />
         <AssociationConnector Association="beerModel.FKAspNetUser755613" ManuallyRouted="false" />
-        <AssociationConnector Association="beerModel.FKItem547871" ManuallyRouted="false" />
         <AssociationConnector Association="beerModel.FKLocatie639258" ManuallyRouted="false" />
-        <AssociationConnector Association="beerModel.FKItem887979" ManuallyRouted="false" />
         <AssociationConnector Association="beerModel.AspNetUserRoles" ManuallyRouted="false" />
         <EntityTypeShape EntityType="beerModel.Inhoud" Width="1.5" PointX="6.75" PointY="12.125" />
         <AssociationConnector Association="beerModel.FKInhoud986990" />
         <EntityTypeShape EntityType="beerModel.Bier" Width="1.5" PointX="10" PointY="9" />
         <AssociationConnector Association="beerModel.FKBier328768" />
         <AssociationConnector Association="beerModel.FKBier353157" />
+        <EntityTypeShape EntityType="beerModel.Item" Width="1.5" PointX="7.25" PointY="7.25" />
+        <AssociationConnector Association="beerModel.FKItem547871" />
         <AssociationConnector Association="beerModel.FKItem979642" />
+        <AssociationConnector Association="beerModel.FKItem887979" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

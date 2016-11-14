@@ -9,7 +9,7 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Item"))
 {
     @Html.AntiForgeryToken()
 
@@ -21,14 +21,15 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Bier, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("BierLijst", null, htmlAttributes: new { @class = "form-control", @id = "Bierlijst" })
+                @Html.DropDownList("BId", ViewBag.BierLijst as SelectList, htmlAttributes: new { @class = "form-control", @id = "BId" })
+                @Html.ValidationMessageFor(model => model.Bierid, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Bier, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Locatie, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("LocatieLijst", null, htmlAttributes: new { @class = "form-control", @id = "Bierlijst" })
+                @Html.DropDownList("LId", ViewBag.LocatieLijst as SelectList, htmlAttributes: new { @class = "form-control", @id = "LId" })
             </div>
         </div>
 
@@ -50,54 +51,57 @@
             </div>
         </div>
 
-        @{
-//TODO Barcode scanner for easy adding to items
-        }
-        <form>
-            <input type="file" accept="image/*;capture=camera">
-        </form>
-
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Voeg toe" class="btn btn-default" />
             </div>
         </div>
     </div>
-            }
+}
+            
 
 <div>
     @Html.ActionLink("Terug naar lijst", "Index")
 </div>
 
-<div id="barcode">
-    <video id="barcodevideo" autoplay></video>
-    <canvas id="barcodecanvasg"></canvas>
-</div>
-<canvas id="barcodecanvas"></canvas>
-<div id="result"></div>
+
+@{
+//TODO Barcode scanner for easy adding to items
+}
+@*<form>
+            <input type="file" accept="image/*;capture=camera">
+        </form>
 
 
-<script type="text/javascript">
+    @*<div id="barcode">
+        <video id="barcodevideo" autoplay></video>
+        <canvas id="barcodecanvasg"></canvas>
+    </div>
+    <canvas id="barcodecanvas"></canvas>
+    <div id="result"></div>
 
-    var sound = new Audio("../../Media/sound/barcode.wav");
 
-    $(document).ready(function () {
-	barcode.config.start = 0.1;
-	barcode.config.end = 0.9;
-	barcode.config.threshold= 160;
-	barcode.config.quality= 0.45;
-	barcode.config.video = '#barcodevideo';
-	barcode.config.canvas = '#barcodecanvas';
-	barcode.config.canvasg = '#barcodecanvasg';
-	barcode.setHandler(function(barcode) {
-	    $('#result').html(barcode);
-	});
-	barcode.init();
+    <script type="text/javascript">
 
-	$('#result').bind('DOMSubtreeModified', function(e) {
-		sound.play();
-	});
-        
-});
+        var sound = new Audio("../../Media/sound/barcode.wav");
 
-</script>
+        $(document).ready(function () {
+        barcode.config.start = 0.1;
+        barcode.config.end = 0.9;
+        barcode.config.threshold= 160;
+        barcode.config.quality= 0.45;
+        barcode.config.video = '#barcodevideo';
+        barcode.config.canvas = '#barcodecanvas';
+        barcode.config.canvasg = '#barcodecanvasg';
+        barcode.setHandler(function(barcode) {
+            $('#result').html(barcode);
+        });
+        barcode.init();
+
+        $('#result').bind('DOMSubtreeModified', function(e) {
+            sound.play();
+        });
+
+    });
+
+    </script>*@

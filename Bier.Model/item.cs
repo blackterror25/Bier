@@ -16,13 +16,14 @@ namespace Beer.Model
     {
         public int id { get; set; }
         public int Bierid { get; set; }
-        public int LocatieColumn { get; set; }
+        public int LocatieId { get; set; }
         public string AspNetUsersId { get; set; }
         public int Aantal { get; set; }
         public bool Openbaar { get; set; }
+        public Nullable<System.DateTime> HoudsbaarheidDatum { get; set; }
     
         public virtual AspNetUsers AspNetUsers { get; set; }
-        public virtual Locatie Locatie { get; set; }
         public virtual Bier Bier { get; set; }
+        public virtual Locatie Locatie { get; set; }
     }
 }

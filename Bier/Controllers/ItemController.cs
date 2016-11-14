@@ -47,16 +47,16 @@ namespace Beer.Controllers
 
             if (UserService.GetShowPublicBier(User.Identity.GetUserId())) bierList.AddRange(bierService.GetPublicBier());
             bierList.AddRange(bierService.GetBierPerUserId(User.Identity.GetUserId()));
-            var bierFix = bierList.Select(b => new { Id = b.Id, Name = (b.Naam + " " + b.Inhoud.Capaciteit + b.Inhoud.Eenheid) });
+            var bierFix = bierList.Select(b => new { BId = b.Id, Name = (b.Naam + " " + b.Inhoud.Capaciteit + b.Inhoud.Eenheid) });
 
-            ViewBag.BierLijst = new SelectList(bierFix, "Id", "Name");
+            ViewBag.BierLijst = new SelectList(bierFix, "BId", "Name");
 
 
             if (UserService.GetShowPublicLocatie(User.Identity.GetUserId())) locatieList.AddRange(locatieService.GetPublicLocatie());
             locatieList.AddRange(locatieService.GetAllLocationsPerUser(User.Identity.GetUserId()));
-            var locatieFix = locatieList.Select(l => new { Id = l.Id, Name = l.Naam });
+            var locatieFix = locatieList.Select(l => new { LId = l.Id, Name = l.Naam });
 
-            ViewBag.LocatieLijst = new SelectList(locatieFix, "Id", "Name");
+            ViewBag.LocatieLijst = new SelectList(locatieFix, "LId", "Name");
 
 
             return View();
@@ -66,16 +66,32 @@ namespace Beer.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
+#if Release
             try
             {
-                // TODO: Add insert logic here
+#endif
+                item = new Item();
+                itemService = new ItemService();
+
+                item.Bierid = Convert.ToInt32(collection["BId"]);
+                item.LocatieId = Convert.ToInt32(collection["LId"]);
+                item.AspNetUsersId = User.Identity.GetUserId();
+                item.Aantal = Convert.ToInt32(collection["Aantal"]);
+                //item.Openbaar = Convert.ToBoolean(collection["Openbaar"]);
+                item.Openbaar = true;
+                item.HoudsbaarheidDatum = Convert.ToDateTime(collection["HoudsbaarheidDatum"]);
+
+                itemService.AddNewItem(item);
 
                 return RedirectToAction("Index");
+#if Release
             }
             catch
             {
                 return View();
+
             }
+#endif
         }
 
         // GET: Item/Edit/5

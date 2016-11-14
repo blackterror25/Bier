@@ -17,5 +17,10 @@ namespace Beer.Service
             itemDAO = new ItemDAO();
             return itemDAO.GetAllItemsPerUser(v);
         }
+
+        public void AddNewItem(Item item)
+        {
+            ItemDAO.AddNewItem(item);
+        }
     }
 }

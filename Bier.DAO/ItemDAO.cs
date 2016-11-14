@@ -20,5 +20,14 @@ namespace Beer.DAO
                 return il;
             }
         }
+
+        public static void AddNewItem(Item item)
+        {
+            using (var db = new BeerEntities())
+            {
+                db.Entry(item).State = EntityState.Added;
+                db.SaveChanges();
+            }
+        }
     }
 }

@@ -66,10 +66,8 @@ namespace Beer.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-#if Release
             try
             {
-#endif
                 item = new Item();
                 itemService = new ItemService();
 
@@ -84,14 +82,12 @@ namespace Beer.Controllers
                 itemService.AddNewItem(item);
 
                 return RedirectToAction("Index");
-#if Release
             }
             catch
             {
                 return View();
 
             }
-#endif
         }
 
         // GET: Item/Edit/5

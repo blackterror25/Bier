@@ -20,6 +20,8 @@ namespace Beer.Controllers
         // GET: Bier
         public ActionResult Index()
         {
+            if (User.Identity.GetUserId() == null) return RedirectToAction("Login", "Account");
+
             List<Bier> bier = new List<Bier>();
             bierService = new BierService();
 
@@ -30,15 +32,11 @@ namespace Beer.Controllers
             return View(bier);
         }
 
-        // GET: Bier/Details/5
-        public ActionResult Details(int? id)
-        {
-            return View();
-        }
-
         // GET: Bier/Create
         public ActionResult Create()
         {
+            if (User.Identity.GetUserId() == null) return RedirectToAction("Login", "Account");
+
             InhoudService inhoudService = new InhoudService();
             List<Inhoud> inhoudList = new List<Inhoud>();
 
@@ -60,6 +58,8 @@ namespace Beer.Controllers
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
+            if (User.Identity.GetUserId() == null) return RedirectToAction("Login", "Account");
+
             try
             {
                 bier = new Bier();
@@ -85,6 +85,8 @@ namespace Beer.Controllers
         // GET: Bier/Edit/5
         public ActionResult Edit(int? id)
         {
+            if (User.Identity.GetUserId() == null) return RedirectToAction("Login", "Account");
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -121,6 +123,8 @@ namespace Beer.Controllers
         [HttpPost]
         public ActionResult Edit(int? id, FormCollection collection)
         {
+            if (User.Identity.GetUserId() == null) return RedirectToAction("Login", "Account");
+
             try
             {
                 if (id == null)
@@ -156,22 +160,9 @@ namespace Beer.Controllers
         // GET: Bier/Delete/5
         public ActionResult Delete(int id)
         {
+            if (User.Identity.GetUserId() == null) return RedirectToAction("Login", "Account");
+
             return View();
         }
-
-
-        //// POST: Bier/Delete/5
-        //[HttpPost]
-        //public ActionResult Delete(int id, FormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction("Index");
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
     }
 }

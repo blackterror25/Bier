@@ -18,7 +18,7 @@
             @Html.DisplayNameFor(model => model.LocatieId)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.AspNetUsersId)
+            @Html.DisplayNameFor(model => model.HoudsbaarheidDatum)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Aantal)
@@ -38,7 +38,7 @@
             @Html.DisplayFor(modelItem => item.LocatieId)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.AspNetUsersId)
+            @Convert.ToDateTime(item.HoudsbaarheidDatum).ToString("d MMMM yyyy")
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Aantal)

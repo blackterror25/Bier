@@ -1,10 +1,11 @@
 ﻿@model Beer.Model.Item
 
-@Scripts.Render("~/bundles/BarcodeScanner")
-@Styles.Render("~/bundles/barcodecss")
+
 
 @{
     ViewBag.Title = "Create";
+    ViewBag.Header = Scripts.Render("~/bundles/BarcodeScanner");
+    ViewBag.Header = Styles.Render("~/bundles/barcodecss");
 }
 
 <h2>Create</h2>
@@ -44,8 +45,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.HoudsbaarheidDatum, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.TextBox("", String.Format("{0:d}", Model.HoudsbaarheidDatum()), new { @class = "datefield", type = "date" })
-                @Html.ValidationMessageFor(model => model.HoudsbaarheidDatum, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.HoudsbaarheidDatum, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.HoudsbaarheidDatum)
             </div>
         </div>
 
@@ -53,8 +54,8 @@
             @Html.LabelFor(model => model.Openbaar, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
-                    @Html.CheckBoxFor(model => model.Openbaar, htmlAttributes: new { @checked = true })
-                    @Html.ValidationMessageFor(model => model.Openbaar, "", new { @class = "text-danger" })
+                    @Html.CheckBoxFor(model => model.Openbaar, new { @checked = true, @class = "text-danger col-md-2" })
+                    @Html.ValidationMessageFor(model => model.Openbaar, "")
                 </div>
             </div>
         </div>
@@ -72,6 +73,10 @@
     @Html.ActionLink("Terug naar lijst", "Index")
 </div>
 
+
+@{ 
+    ViewBag.PageScript = Html.Raw("<script src=\"/Scripts/PageScripts/ItemEdit.js\" />");
+}
 
 @{
 //TODO Barcode scanner for easy adding to items

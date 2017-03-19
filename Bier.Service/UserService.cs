@@ -30,10 +30,18 @@ namespace Beer.Service
             return userDAO.GetShowPublicBier(id);
         }
 
-        public static bool VeranderPublicSettings(string v, bool showPublicLocatie, bool showPublicInhoud, bool showPublicBier)
+        public static bool VeranderPublicSettings(string id, bool showPublicLocatie, bool showPublicInhoud, bool showPublicBier)
         {
             UserDAO userDAO = new UserDAO();
-            return userDAO.VeranderPublicSettings(v, showPublicLocatie, showPublicInhoud, showPublicBier);
+            AspNetUsers user = userDAO.GetUserById(id);
+
+            if (user == null) throw new Exception();
+
+            user.ShowPublicLocatie = showPublicLocatie;
+            user.ShowPublicInhoud = showPublicInhoud;
+            user.ShowPublicBier = showPublicBier; 
+
+            return userDAO.UpdateUser(user);
         }
     }
 }

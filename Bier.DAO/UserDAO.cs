@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Beer.Model;
+using System.Data.Entity;
 
 namespace Beer.DAO
 {
@@ -34,19 +35,22 @@ namespace Beer.DAO
             }
         }
 
-        public bool VeranderPublicSettings(string id,bool showPublicLocatie,  bool showPublicInhoud, bool showPublicBier)
+        public bool UpdateUser(AspNetUsers user)
         {
             using (var db = new BeerEntities())
             {
-                var user = new AspNetUsers() { ShowPublicLocatie = showPublicLocatie, ShowPublicInhoud = showPublicInhoud, ShowPublicBier = showPublicBier };
-                db.AspNetUsers.Attach(user);
-                db.Entry(user).Property(u => u.ShowPublicLocatie).IsModified = true;
-                db.Entry(user).Property(u => u.ShowPublicInhoud).IsModified = true;
-                db.Entry(user).Property(u => u.ShowPublicBier).IsModified = true;
-
+                db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
 
                 return true;
+            }
+        }
+
+        public AspNetUsers GetUserById(string id)
+        {
+            using (var db = new BeerEntities())
+            {
+                return db.AspNetUsers.Where(u => u.Id == id).First();
             }
         }
     }

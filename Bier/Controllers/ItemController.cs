@@ -75,7 +75,6 @@ namespace Beer.Controllers
                 item.LocatieId = Convert.ToInt32(collection["LId"]);
                 item.AspNetUsersId = User.Identity.GetUserId();
                 item.Aantal = Convert.ToInt32(collection["Aantal"]);
-                var x = collection["Openbaar"];
                 item.Openbaar = Convert.ToBoolean(collection["Openbaar"].Contains("true"));
                 item.Openbaar = true;
                 item.HoudsbaarheidDatum = Convert.ToDateTime(collection["HoudsbaarheidDatum"]);

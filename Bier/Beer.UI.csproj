@@ -329,7 +329,9 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="ConfigFiles\ConnectionString.config" />
-    <Content Include="Scripts\barcode.js" />
+    <Content Include="Scripts\Barcode\adapter-latest.js" />
+    <Content Include="Scripts\Barcode\live_w_locator.js" />
+    <Content Include="Scripts\Barcode\quagga.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.js" />
     <Content Include="Scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="ConfigFiles\MailSettings.config" />

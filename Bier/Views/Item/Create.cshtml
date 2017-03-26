@@ -4,7 +4,6 @@
 
 @{
     ViewBag.Title = "Create";
-    ViewBag.Header = Scripts.Render("~/bundles/BarcodeScanner");
     ViewBag.Header = Styles.Render("~/bundles/barcodecss");
 }
 
@@ -68,53 +67,14 @@
     </div>
 }
 
+<div id="interactive" class="viewport"></div>
+
 
 <div>
     @Html.ActionLink("Terug naar lijst", "Index")
 </div>
 
 
-@{ 
-    ViewBag.PageScript = Html.Raw("<script src=\"/Scripts/PageScripts/ItemEdit.js\" />");
-}
-
 @{
-//TODO Barcode scanner for easy adding to items
+    ViewBag.PageScript = Scripts.Render("~/bundles/BarcodeScanner");
 }
-@*<form>
-            <input type="file" accept="image/*;capture=camera">
-        </form>
-
-
-    @*<div id="barcode">
-        <video id="barcodevideo" autoplay></video>
-        <canvas id="barcodecanvasg"></canvas>
-    </div>
-    <canvas id="barcodecanvas"></canvas>
-    <div id="result"></div>
-
-
-    <script type="text/javascript">
-
-        var sound = new Audio("../../Media/sound/barcode.wav");
-
-        $(document).ready(function () {
-        barcode.config.start = 0.1;
-        barcode.config.end = 0.9;
-        barcode.config.threshold= 160;
-        barcode.config.quality= 0.45;
-        barcode.config.video = '#barcodevideo';
-        barcode.config.canvas = '#barcodecanvas';
-        barcode.config.canvasg = '#barcodecanvasg';
-        barcode.setHandler(function(barcode) {
-            $('#result').html(barcode);
-        });
-        barcode.init();
-
-        $('#result').bind('DOMSubtreeModified', function(e) {
-            sound.play();
-        });
-
-    });
-
-    </script>*@
